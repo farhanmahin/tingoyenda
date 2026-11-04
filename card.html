@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>তিন গোয়েন্দা - আইডি কার্ড জেনারেটর</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Anek Bangla and Hind Siliguri -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- html2canvas for Download Feature -->
+    <!-- html2canvas for High Quality Image Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         :root {
-            --primary-color: #2b3a4a;
+            --primary-color: #1e293b;
             --accent-color: #e63946;
-            --bg-light: #f8f9fa;
-            --card-accent: #e63946;
-            --card-light-bg: rgba(230, 57, 70, 0.05);
+            --card-light-bg: rgba(230, 57, 70, 0.04);
+            --card-border-color: rgba(230, 57, 70, 0.2);
         }
 
         * {
@@ -30,8 +29,8 @@
 
         body {
             font-family: 'Hind Siliguri', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
+            background-color: #f1f5f9;
+            color: #1e293b;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,17 +43,17 @@
             flex-direction: column;
             gap: 30px;
             width: 100%;
-            max-width: 900px;
+            max-width: 920px;
             background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
         }
 
         @media (min-width: 768px) {
             .container {
                 flex-direction: row;
-                align-items: flex-start;
+                align-items: center;
             }
         }
 
@@ -71,17 +70,17 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 20px;
-            background: var(--bg-light);
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #e1e4e8;
+            gap: 24px;
+            background: #f8fafc;
+            padding: 35px 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
         }
 
         h2 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
         }
 
@@ -93,37 +92,39 @@
 
         label {
             font-size: 0.95rem;
-            color: #555;
+            color: #475569;
             font-weight: 500;
         }
 
         input[type="text"] {
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             font-family: 'Hind Siliguri', sans-serif;
             font-size: 0.95rem;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s ease;
         }
 
         input[type="text"]:focus {
-            border-color: #4a90e2;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
         .color-options {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             margin-top: 4px;
         }
 
         .color-btn {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            border: 2px solid transparent;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 1px #cbd5e1;
             cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .color-btn:hover {
@@ -131,119 +132,194 @@
         }
 
         .color-btn.active {
-            border-color: #333;
+            box-shadow: 0 0 0 2px var(--primary-color);
             transform: scale(1.1);
         }
 
-        /* Business Card Base Styles (Standard 3.5" x 2" ratio = 350px x 200px) */
+        /* -------------------------------------------------------------
+           VISITING CARD STYLES (Anek Bangla Font & Aesthetic Elements)
+        ------------------------------------------------------------- */
         .card-wrapper {
-            width: 350px;
-            height: 200px;
+            width: 360px;
+            height: 210px;
             background-color: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            border: 1px solid #eaeaea;
+            padding: 20px 24px;
+            border: 1px solid var(--card-border-color);
+            font-family: 'Anek Bangla', sans-serif;
             transition: all 0.3s ease;
         }
 
-        /* Minimal Subtle Accent Design */
+        /* Background Soft Tint Gradient */
         .card-wrapper::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: var(--card-accent);
+            inset: 0;
+            background: radial-gradient(circle at 50% 30%, var(--card-light-bg) 0%, rgba(255,255,255,0) 70%);
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .card-wrapper::after {
-            content: '';
+        /* Decorative Geometric Circles & Lines */
+        .card-decor-circle-1 {
             position: absolute;
-            bottom: -30px;
-            right: -30px;
-            width: 90px;
-            height: 90px;
+            top: -40px;
+            right: -40px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
+            border: 1px solid var(--card-border-color);
             background-color: var(--card-light-bg);
             z-index: 1;
         }
 
+        .card-decor-circle-2 {
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 1px dashed var(--card-border-color);
+            z-index: 1;
+        }
+
+        .card-decor-line {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--card-accent), transparent);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        /* Watermark Feature (Large ??? background outline) */
+        .card-watermark {
+            position: absolute;
+            font-size: 8.5rem;
+            font-weight: 800;
+            color: var(--card-accent);
+            opacity: 0.04;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            user-select: none;
+            z-index: 1;
+            letter-spacing: -6px;
+        }
+
+        /* Card Content Container */
         .card-content {
             z-index: 2;
             width: 100%;
-            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+        }
+
+        /* Header Section */
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
         .card-title {
-            font-family: 'Anek Bangla', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.95rem;
             font-weight: 700;
             color: var(--card-accent);
-            line-height: 1.1;
+            line-height: 1;
             letter-spacing: 0.5px;
         }
 
-        .card-question-marks {
-            font-family: 'Anek Bangla', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--card-accent);
-            margin-top: -2px;
-            margin-bottom: 14px;
-            letter-spacing: 2px;
+        .card-divider-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+            width: 100%;
+            justify-content: center;
         }
 
+        .card-divider-line {
+            height: 1px;
+            width: 35px;
+            background: linear-gradient(to right, transparent, var(--card-accent));
+        }
+
+        .card-divider-line.right {
+            background: linear-gradient(to left, transparent, var(--card-accent));
+        }
+
+        .card-question-marks {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--card-accent);
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+
+        /* Member Info Table/List (Center & Justified Look) */
         .card-members {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
             width: 100%;
-            font-family: 'Anek Bangla', sans-serif;
+            max-width: 260px;
         }
 
-        .member-line {
-            font-size: 0.88rem;
-            color: #333333;
-            text-align: center;
-            white-space: nowrap;
+        .member-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.92rem;
+            line-height: 1.2;
+            color: #334155;
         }
 
         .member-role {
             font-weight: 600;
-            color: #444444;
+            color: #1e293b;
+            text-align: right;
+            padding-right: 5px;
         }
 
         .member-name {
             font-weight: 400;
-            color: #222222;
+            color: #334155;
+            text-align: left;
+            padding-left: 5px;
         }
 
+        /* Action Button */
         .download-btn {
-            padding: 10px 20px;
+            padding: 11px 24px;
             background-color: var(--primary-color);
-            color: #fff;
+            color: #ffffff;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Hind Siliguri', sans-serif;
             font-size: 0.95rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.15);
+            transition: all 0.2s ease;
         }
 
         .download-btn:hover {
-            background-color: #1a2530;
+            background-color: #0f172a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(30, 41, 59, 0.2);
         }
     </style>
 </head>
@@ -272,10 +348,29 @@
             <div class="input-group">
                 <label>রং সিলেক্ট করুন</label>
                 <div class="color-options">
-                    <button class="color-btn active" style="background-color: #e63946;" data-color="#e63946" data-light="rgba(230, 57, 70, 0.06)" title="লাল"></button>
-                    <button class="color-btn" style="background-color: #1d3557;" data-color="#1d3557" data-light="rgba(29, 53, 87, 0.06)" title="নীল"></button>
-                    <button class="color-btn" style="background-color: #2a9d8f;" data-color="#2a9d8f" data-light="rgba(42, 157, 143, 0.06)" title="সবুজ"></button>
-                    <button class="color-btn" style="background-color: #6a0dad;" data-color="#6a0dad" data-light="rgba(106, 13, 173, 0.06)" title="বেগুনি"></button>
+                    <button class="color-btn active" style="background-color: #e63946;" 
+                            data-color="#e63946" 
+                            data-light="rgba(230, 57, 70, 0.05)" 
+                            data-border="rgba(230, 57, 70, 0.22)" 
+                            title="লাল"></button>
+                    
+                    <button class="color-btn" style="background-color: #1d3557;" 
+                            data-color="#1d3557" 
+                            data-light="rgba(29, 53, 87, 0.05)" 
+                            data-border="rgba(29, 53, 87, 0.22)" 
+                            title="নীল"></button>
+                    
+                    <button class="color-btn" style="background-color: #2a9d8f;" 
+                            data-color="#2a9d8f" 
+                            data-light="rgba(42, 157, 143, 0.05)" 
+                            data-border="rgba(42, 157, 143, 0.22)" 
+                            title="সবুজ"></button>
+                    
+                    <button class="color-btn" style="background-color: #7b2cbf;" 
+                            data-color="#7b2cbf" 
+                            data-light="rgba(123, 44, 191, 0.05)" 
+                            data-border="rgba(123, 44, 191, 0.22)" 
+                            title="বেগুনি"></button>
                 </div>
             </div>
         </div>
@@ -283,19 +378,33 @@
         <!-- Preview Section -->
         <div class="preview-section">
             <div class="card-wrapper" id="visitingCard">
+                <!-- Graphical Elements & Watermark -->
+                <div class="card-decor-circle-1"></div>
+                <div class="card-decor-circle-2"></div>
+                <div class="card-decor-line"></div>
+                <div class="card-watermark">???</div>
+
+                <!-- Main Content (Anek Bangla Font) -->
                 <div class="card-content">
-                    <div class="card-title">তিন গোয়েন্দা</div>
-                    <div class="card-question-marks">???</div>
+                    <div class="card-header">
+                        <div class="card-title">তিন গোয়েন্দা</div>
+                        <div class="card-divider-group">
+                            <div class="card-divider-line"></div>
+                            <div class="card-question-marks">???</div>
+                            <div class="card-divider-line right"></div>
+                        </div>
+                    </div>
+
                     <div class="card-members">
-                        <div class="member-line">
+                        <div class="member-row">
                             <span class="member-role">গোয়েন্দা প্রধান :</span>
                             <span class="member-name" id="previewChief">কিশোর পাশা</span>
                         </div>
-                        <div class="member-line">
+                        <div class="member-row">
                             <span class="member-role">সহকারী গোয়েন্দা :</span>
                             <span class="member-name" id="previewAssistant">রবিন মিলফোর্ড</span>
                         </div>
-                        <div class="member-line">
+                        <div class="member-row">
                             <span class="member-role">নথিগবেষক :</span>
                             <span class="member-name" id="previewResearcher">মুসা আমান</span>
                         </div>
@@ -321,7 +430,7 @@
         const cardWrapper = document.getElementById('visitingCard');
         const downloadBtn = document.getElementById('downloadBtn');
 
-        // Live Text Update Event Listeners
+        // Dynamic Live Text Updates
         chiefInput.addEventListener('input', (e) => {
             previewChief.textContent = e.target.value || '';
         });
@@ -334,7 +443,7 @@
             previewResearcher.textContent = e.target.value || '';
         });
 
-        // Color Selection Logic
+        // Theme Switcher & Color Customization Logic
         colorBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 colorBtns.forEach(b => b.classList.remove('active'));
@@ -342,26 +451,28 @@
 
                 const selectedColor = btn.getAttribute('data-color');
                 const lightBg = btn.getAttribute('data-light');
+                const borderColor = btn.getAttribute('data-border');
 
-                // Update CSS variables for card styling
+                // Dynamic CSS variable updates
                 cardWrapper.style.setProperty('--card-accent', selectedColor);
                 cardWrapper.style.setProperty('--card-light-bg', lightBg);
-                cardWrapper.style.backgroundColor = lightBg; // Light tint applied to white background
+                cardWrapper.style.setProperty('--card-border-color', borderColor);
             });
         });
 
-        // Download as Image Feature
+        // High Quality Card Image Generator Script
         downloadBtn.addEventListener('click', () => {
             html2canvas(cardWrapper, {
-                scale: 3, // High DPI download
-                backgroundColor: "#ffffff"
+                scale: 4, // Ultra High Definition PNG
+                backgroundColor: "#ffffff",
+                useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'tin-goyenda-card.png';
+                link.download = 'tin-goyenda-visiting-card.png';
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
         });
     </script>
 </body>
-  </html>
+    </html>
