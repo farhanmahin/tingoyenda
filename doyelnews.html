@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ডয়েল নিউজ - নিউজ ফটো কার্ড জেনারেটর</title>
-    <!-- SolaimanLipi & Google Fonts -->
+    <!-- Professional Bengali Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=SolaimanLipi&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@700;800&family=Hind+Siliguri:wght@400;600;700&family=Noto+Serif+Bengali:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- html2canvas Library for HD Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -22,7 +22,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'SolaimanLipi', 'Hind Siliguri', Arial, sans-serif;
+            font-family: 'Hind Siliguri', Arial, sans-serif;
         }
 
         body {
@@ -44,14 +44,13 @@
         header h1 {
             color: #d32f2f;
             font-size: 26px;
-            font-family: 'SolaimanLipi', sans-serif;
+            font-weight: 700;
         }
 
         header p {
             color: #666;
             font-size: 14px;
             margin-top: 3px;
-            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .main-container {
@@ -83,7 +82,6 @@
             color: #111;
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 8px;
-            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .form-group {
@@ -96,7 +94,6 @@
             font-weight: 600;
             font-size: 14px;
             color: #444;
-            font-family: 'SolaimanLipi', sans-serif;
         }
 
         input[type="text"], textarea, select {
@@ -104,10 +101,9 @@
             padding: 10px 12px;
             border: 1px solid #cccccc;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 15px;
             background-color: #fafafa;
             transition: all 0.2s ease;
-            font-family: 'SolaimanLipi', sans-serif;
         }
 
         input[type="text"]:focus, textarea:focus, select:focus {
@@ -133,7 +129,6 @@
             background: #fafafa;
             cursor: pointer;
             transition: 0.2s;
-            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .file-upload-wrapper:hover {
@@ -169,7 +164,6 @@
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .theme-btn.active {
@@ -182,7 +176,7 @@
         .theme-green { background-color: #008744; }
         .theme-dark { background-color: #222222; }
 
-        /* Zoom and Pan Controls */
+        /* Zoom Controls */
         .img-adjust-controls {
             display: flex;
             gap: 10px;
@@ -242,6 +236,7 @@
             transform-origin: center center;
         }
 
+        /* PHOTO CARD FONTS ONLY */
         .category-tag {
             position: absolute;
             top: 15px;
@@ -250,10 +245,10 @@
             color: #ffffff;
             padding: 4px 12px;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 700;
             border-radius: 3px;
             z-index: 2;
-            font-family: 'SolaimanLipi', sans-serif;
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         /* Middle Bar: Brand Logo */
@@ -269,15 +264,15 @@
         }
 
         .brand-title {
-            font-size: 30px;
-            font-weight: bold;
+            font-size: 32px;
+            font-weight: 800;
             letter-spacing: 0.5px;
             line-height: 1;
             text-align: center;
-            font-family: 'SolaimanLipi', sans-serif;
+            font-family: 'Anek Bangla', sans-serif; /* Professional Newspaper Brand Font */
         }
 
-        /* Bottom Text Area (Strictly White Background & Centered Text) */
+        /* Bottom Text Area (White Background & Centered News Text) */
         .card-content-area {
             height: 38%;
             background-color: #ffffff;
@@ -289,12 +284,12 @@
         }
 
         .news-text {
-            font-size: 20px;
+            font-size: 21px;
             line-height: 1.5;
-            font-weight: bold;
-            color: #1a1a1a;
-            text-align: center; /* Center-aligned text */
-            font-family: 'SolaimanLipi', sans-serif;
+            font-weight: 600;
+            color: #111111;
+            text-align: center;
+            font-family: 'Noto Serif Bengali', 'Hind Siliguri', serif; /* Classic Bengali News Print Font */
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -324,7 +319,7 @@
         .news-date {
             font-size: 13px;
             color: #777777;
-            font-family: 'SolaimanLipi', sans-serif;
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         /* Download Button */
@@ -345,7 +340,6 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .download-btn:hover {
@@ -529,4 +523,4 @@
         }
     </script>
 </body>
-                        </html>
+    </html>
