@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রেট দ্যা বুক</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --primary-color: #2b3a4a;
+            --accent-color: #1a73e8;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Kalpurush', 'Siyam Rupali';
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background 0.2s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            opacity: 0.92;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .book-display {
+            text-align: center;
+            padding: 30px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .book-title {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .question-group {
+            margin-bottom: 20px;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+
+        .question-title {
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .rating-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .rate-btn {
+            flex: 1;
+            padding: 8px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .rate-btn.selected {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        /* Color Theme Options */
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .color-option {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .color-option.selected {
+            border-color: #000;
+        }
+
+        /* Card Canvas Styling */
+        .card-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .photo-card {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            border: 2px solid var(--theme-border, #1a73e8);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+        }
+
+        .card-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--theme-color, #1a73e8);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card-book-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .card-score {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--theme-color, #1a73e8);
+            margin: 10px 0;
+        }
+
+        .card-score-label {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .card-details {
+            text-align: left;
+            background: #fafafa;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .card-details p {
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .card-footer {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            border-top: 1px dashed #ddd;
+            padding-top: 10px;
+        }
+
+        /* Caption Section */
+        .caption-section {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .caption-box {
+            width: 100%;
+            height: 160px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            resize: none;
+            background: #fff;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- Step 1: Instructions -->
+    <div id="screen-instructions" class="screen active">
+        <h1>Read the Book</h1>
+        <div class="instructions">
+            <h3>নির্দেশাবলী:</h3>
+            <ol>
+                <li>নিচে <b>"Start"</b> বাটনে ক্লিক করে রেটিং প্রক্রিয়া শুরু করুন।</li>
+                <li>তিন গোয়েন্দা সিরিজের ১৬০টি বই থেকে র‍্যান্ডমলি একটি বই বেছে নেওয়া হবে।</li>
+                <li>বইটি যদি আপনার পড়া হয়ে থাকে তবে রেটিং সেকশনে যান, না পড়া থাকলে পরবর্তী বই সিলেক্ট করুন।</li>
+                <li>নির্দিষ্ট ৩টি প্রশ্নের উত্তর দিন এবং ১ থেকে ৫ স্টার রেটিং সিলেক্ট করুন।</li>
+                <li>আপনার নাম লিখে অটোমেটিক রেটিং ফোটো কার্ড এবং ক্যাপশন জেনারেট করুন।</li>
+            </ol>
+        </div>
+        <button class="btn" onclick="startProcess()">Start</button>
+    </div>
+
+    <!-- Step 2: Book Selection -->
+    <div id="screen-selection" class="screen">
+        <h2>বই নির্বাচন</h2>
+        <div class="book-display">
+            <p>আপনার জন্য নির্বাচিত বই:</p>
+            <div id="displayed-book-title" class="book-title">...</div>
+        </div>
+        <button class="btn" onclick="goToRating()">I have read this book and want to rate it</button>
+        <button class="btn btn-secondary" onclick="pickRandomBook()">I have not read this book, please select another book</button>
+    </div>
+
+    <!-- Step 3: Rating Form -->
+    <div id="screen-rating" class="screen">
+        <h2>রেটিং প্রদান করুন</h2>
+        <p style="text-align: center; font-weight: bold;" id="rating-book-name"></p>
+        
+        <div class="question-group">
+            <div class="question-title">১. বইটি কি তিন গোয়েন্দা সিরিজের সাথে মানানসই?</div>
+            <div class="rating-buttons" id="q1-ratings">
+                <button class="rate-btn" onclick="setRating(1, 1)">1</button>
+                <button class="rate-btn" onclick="setRating(1, 2)">2</button>
+                <button class="rate-btn" onclick="setRating(1, 3)">3</button>
+                <button class="rate-btn" onclick="setRating(1, 4)">4</button>
+                <button class="rate-btn" onclick="setRating(1, 5)">5</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">২. রহস্য এবং গোয়েন্দাগিরির দিকটি কেমন লেগেছে?</div>
+            <div class="rating-buttons" id="q2-ratings">
+                <button class="rate-btn" onclick="setRating(2, 1)">1</button>
+                <button class="rate-btn" onclick="setRating(2, 2)">2</button>
+                <button class="rate-btn" onclick="setRating(2, 3)">3</button>
+                <button class="rate-btn" onclick="setRating(2, 4)">4</button>
+                <button class="rate-btn" onclick="setRating(2, 5)">5</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">৩. গল্পের গঠন ও পড়ার সামগ্রিক অভিজ্ঞতা কেমন?</div>
+            <div class="rating-buttons" id="q3-ratings">
+                <button class="rate-btn" onclick="setRating(3, 1)">1</button>
+                <button class="rate-btn" onclick="setRating(3, 2)">2</button>
+                <button class="rate-btn" onclick="setRating(3, 3)">3</button>
+                <button class="rate-btn" onclick="setRating(3, 4)">4</button>
+                <button class="rate-btn" onclick="setRating(3, 5)">5</button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="user-name">আপনার নাম (বাধ্যতামূলক):</label>
+            <input type="text" id="user-name" placeholder="আপনার নাম লিখুন">
+        </div>
+
+        <button class="btn" onclick="generateCard()">Generate Rating Card</button>
+    </div>
+
+    <!-- Step 4: Card Display & Caption -->
+    <div id="screen-result" class="screen">
+        <h2>রেটিং কার্ড</h2>
+
+        <div class="color-picker">
+            <div class="color-option selected" style="background: #1a73e8;" onclick="changeTheme('#1a73e8', this)"></div>
+            <div class="color-option" style="background: #d93025;" onclick="changeTheme('#d93025', this)"></div>
+            <div class="color-option" style="background: #1e8e3e;" onclick="changeTheme('#1e8e3e', this)"></div>
+            <div class="color-option" style="background: #2d3748;" onclick="changeTheme('#2d3748', this)"></div>
+        </div>
+
+        <div class="card-wrapper">
+            <div id="photo-card" class="photo-card">
+                <div class="card-header">রেট দ্য বুক</div>
+                <div class="card-book-title" id="card-book-name">বইয়ের নাম</div>
+                
+                <div class="card-score-label">গড় রেটিং</div>
+                <div class="card-score" id="card-avg-score">0.0 / 5</div>
+
+                <div class="card-details">
+                    <p><b>রেটিং দাতার নাম:</b> <span id="card-reviewer-name"></span></p>
+                    <p><b>১. সিরিজের সাথে মানানসই:</b> <span id="card-q1-score"></span>/5</p>
+                    <p><b>২. রহস্য ও গোয়েন্দাগিরি:</b> <span id="card-q2-score"></span>/5</p>
+                    <p><b>৩. গল্প ও পড়ার অভিজ্ঞতা:</b> <span id="card-q3-score"></span>/5</p>
+                </div>
+
+                <div class="card-footer">
+                    Soujanye: Tin Goyenda Fans Posting
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-section">
+            <p style="font-weight: bold; margin-bottom: 8px;">আপনার পোস্টের জন্য ক্যাপশনটি এখন থেকে সংগ্রহ করুন:</p>
+            <textarea id="caption-text" class="caption-box" readonly></textarea>
+            <button class="btn btn-secondary" onclick="copyCaption()">Copy Caption</button>
+        </div>
+
+        <button class="btn" style="margin-top: 15px;" onclick="resetApp()">নতুন বই রেট করুন</button>
+    </div>
+
+</div>
+
+<script>
+    const books = [
+        "তিন গোয়েন্দা", "কঙ্কাল দ্বীপ", "রূপালী মাকড়সা", "ছায়াশ্বাপদ", "মমি", "রত্নদানো", "প্রেতসাধনা", "রক্তচক্ষু", "সাগরসৈকত", "জলদস্যুর দ্বীপ ১",
+        "জলদস্যুর দ্বীপ ২", "সবুজ ভূত", "হারানো তিমি", "মুক্তোশিকারী", "মৃত্যুখনি", "কাকাতুয়া রহস্য", "ছুটি", "ভূতের হাসি", "ছিনতাই", "ভীষণ অরণ্য ১",
+        "ভীষণ অরণ্য ২", "ড্রাগন", "হারানো উপত্যকা", "গুহামানব", "ভীতু সিংহ", "মহাকাশের আগন্তুক", "ইন্দ্রজাল", "মহাবিপদ", "খেপা শয়তান", "রত্নচোর",
+        "পুরনো শত্রু", "বোম্বেটে", "ভূতুড়ে সুড়ঙ্গ", "আবার সম্মেলন", "ভয়ালগিরি", "কালো জাহাজ", "পোচার", "ঘড়ির গোলমাল", "কানা বেড়াল", "বাক্সটা প্রয়োজন",
+        "খোড়া গোয়েন্দা", "অথৈ সাগর ১", "অথৈ সাগর ২", "বুদ্ধির ঝিলিক", "গোলাপী মুক্তো", "প্রজাপতির খামার", "পাগল সংঘ", "ভাঙা ঘোড়া", "ঢাকায় তিন গোয়েন্দা", "জলকন্যা",
+        "বেগুনী জলদস্যু", "পায়ের ছাপ", "তেপান্তর", "সিংহের গর্জন", "পুরনো ভূত", "জাদুচক্র", "গাড়ির জাদুকর", "প্রাচীন মূর্তি", "নিশাচর", "দক্ষিণের দ্বীপ",
+        "ঈশ্বরের অশ্রু", "নকল কিশোর", "তিন পিশাচ", "খাবারে বিষ", "ওয়ার্নিং বেল", "অবাক কাণ্ড", "বিমান দুর্ঘটনা", "গোরস্তানের আতঙ্ক", "রেসের ঘোড়া", "খুন!",
+        "স্পেনের জাদুকর", "বানরের মুখোশ", "ধূসর মেরু", "কালো হাত", "মূর্তির হুঙ্কার", "চিতা নিরুদ্দেশ", "অভিনয়", "আলোর সঙ্কেত", "জিনার সেই দ্বীপ", "ঐতিহাসিক দুর্গ",
+        "ঝামেলা", "কুকুরখেকো ডাইনী", "নরকে হাজির", "বিড়াল উধাও", "ঠগবাজি", "যুদ্ধঘোষণা", "মারাত্মক ভুল", "মঞ্চভীতি", "খেলার নেশা", "বিষের ভয়",
+        "দীঘির দানো", "উল্কি রহস্য", "নকশা", "ডাকাতের পিছে", "মৃত্যুঘড়ি", "জলদস্যুর মোহর", "শয়তানের থাবা", "গুপ্তচর শিকারি", "পতঙ্গ ব্যবসা", "পুরানো কামান",
+        "টাকার খেলা", "জাল নোট", "মাকড়সা মানব", "গেল কোথায়", "ওকিমুরো কর্পোরেশন", "বিষাক্ত অর্কিড", "অপারেশন কক্সবাজার", "মায়ানেকড়ে", "প্রেতাত্মার প্রতিশোধ", "ভয়ঙ্কর অসহায়",
+        "সোনার খোজে", "তুষার বন্দি", "বিপজ্জনক খেলা", "রাতের আধারে", "প্রেতের ছায়া", "আরেক ফ্রাঙ্কেনস্টাইন", "মায়াজাল", "রাত্রী ভয়ঙ্কর", "গোপন ফর্মুলা", "সৈকতে সাবধান",
+        "ভ্যাম্পায়ারের দ্বীপ", "খেপা কিশোর", "দ্বীপের মালিক", "কিশোর জাদুকর", "তিন বিঘা", "দক্ষিণ যাত্রা", "গ্রেট রবিনিয়োসো", "গ্রেট কিশোরিয়োসো", "গ্রেট মুসাইয়োসো", "নিখোঁজ সংবাদ",
+        "চাঁদের ছায়া", "অপারেশন অ্যালিগেটর", "প্রত্নসন্ধান", "দুর্গম কারাগার", "মানব ছিনতাই", "নিষিদ্ধ এলাকা", "সময়-সুড়ঙ্গ", "পিশাচ কন্যা", "ডাকাত সর্দার", "ছদ্মবেশী গোয়েন্দা",
+        "জবর দখল", "যুদ্ধযাত্রা", "সীমান্তে সংঘাত", "স্বর্গদ্বীপ", "সি সি সি", "নেকড়ের গুহা", "শ্বাপদের চোখ", "পোষা ডাইনোসর", "ডীপ ফ্রিজ", "তাসের খেলা",
+        "মহাকাশের কিশোর", "প্রেতের অভিশাপ", "বিপদের গন্ধ", "টাইম ট্রাভেল", "স্পাইডারম্যান", "সরাইখানায় ষড়যন্ত্র", "বাশিরহস্য", "বাংলাদেশে তিন গোয়েন্দা", "জয়দেবপুরে তিন গোয়েন্দা", "হীরের কার্তুজ"
+    ];
+
+    let selectedBook = "";
+    let ratings = { q1: 0, q2: 0, q3: 0 };
+
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    function startProcess() {
+        showScreen('screen-selection');
+        pickRandomBook();
+    }
+
+    function pickRandomBook() {
+        const randomIndex = Math.floor(Math.random() * books.length);
+        selectedBook = books[randomIndex];
+        document.getElementById('displayed-book-title').innerText = selectedBook;
+    }
+
+    function goToRating() {
+        document.getElementById('rating-book-name').innerText = selectedBook;
+        ratings = { q1: 0, q2: 0, q3: 0 };
+        document.querySelectorAll('.rate-btn').forEach(btn => btn.classList.remove('selected'));
+        document.getElementById('user-name').value = '';
+        showScreen('screen-rating');
+    }
+
+    function setRating(qNum, value) {
+        ratings['q' + qNum] = value;
+        const group = document.getElementById(`q${qNum}-ratings`);
+        group.querySelectorAll('.rate-btn').forEach((btn, idx) => {
+            if (idx + 1 === value) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+    }
+
+    function generateCard() {
+        const name = document.getElementById('user-name').value.trim();
+        if (!name) {
+            alert("অনুগ্রহ করে আপনার নাম লিখুন।");
+            return;
+        }
+
+        if (!ratings.q1 || !ratings.q2 || !ratings.q3) {
+            alert("অনুগ্রহ করে সবকটি প্রশ্নের রেটিং প্রদান করুন।");
+            return;
+        }
+
+        const avgScore = ((ratings.q1 + ratings.q2 + ratings.q3) / 3).toFixed(1);
+
+        document.getElementById('card-book-name').innerText = selectedBook;
+        document.getElementById('card-reviewer-name').innerText = name;
+        document.getElementById('card-avg-score').innerText = `${avgScore} / 5`;
+        document.getElementById('card-q1-score').innerText = ratings.q1;
+        document.getElementById('card-q2-score').innerText = ratings.q2;
+        document.getElementById('card-q3-score').innerText = ratings.q3;
+
+        // Construct Caption exactly as specified
+        const caption = `#রেট_দ্যা_বুক\n\nRating data's name: ${selectedBook}\nByaktigoto rating: ${avgScore}/5\n\n১. সিরিজের সাথে মানানসই: ${ratings.q1}/5\n২. রহস্য ও গোয়েন্দাগিরি: ${ratings.q2}/5\n৩. গল্প ও পড়ার অভিজ্ঞতা: ${ratings.q3}/5\n\n<Porobortite apnar nijer onubhuti ekhane kichu line e likhun>`;
+        
+        document.getElementById('caption-text').value = caption;
+
+        showScreen('screen-result');
+    }
+
+    function changeTheme(color, el) {
+        document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+        el.classList.add('selected');
+        const card = document.getElementById('photo-card');
+        card.style.setProperty('--theme-color', color);
+        card.style.setProperty('--theme-border', color);
+    }
+
+    function copyCaption() {
+        const captionText = document.getElementById('caption-text');
+        captionText.select();
+        document.execCommand('copy');
+        alert("ক্যাপশন কপি করা হয়েছে!");
+    }
+
+    function resetApp() {
+        showScreen('screen-selection');
+        pickRandomBook();
+    }
+</script>
+
+</body>
+</html>
