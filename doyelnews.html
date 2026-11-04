@@ -3,550 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ডয়েল নিউজ - ফটো কার্ড জেনারেটর</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Hind Siliguri for Bengali -->
+    <title>ডয়েল নিউজ - নিউজ ফটো কার্ড জেনারেটর</title>
+    <!-- SolaimanLipi & Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- html2canvas for HD image conversion -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=SolaimanLipi&display=swap" rel="stylesheet">
+    <!-- html2canvas Library for HD Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        bengali: ['"Hind Siliguri"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
+        @font-face {
+            font-family: 'SolaimanLipi';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/bangla-fonts/1.0.0/SolaimanLipi/SolaimanLipi.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        :root {
+            --primary-color: #e60000; /* Default Red Theme */
+            --bg-body: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #222222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'SolaimanLipi', 'Hind Siliguri', Arial, sans-serif;
+        }
+
         body {
-            font-family: 'Hind Siliguri', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-
-        /* Color Themes definitions */
-        .theme-red {
-            --primary-bg: #dc2626;
-            --primary-gradient: linear-gradient(135deg, #ef4444, #991b1b);
-            --badge-bg: #fee2e2;
-            --badge-text: #991b1b;
-            --border-color: #f87171;
-            --footer-bg: #7f1d1d;
-        }
-
-        .theme-blue {
-            --primary-bg: #2563eb;
-            --primary-gradient: linear-gradient(135deg, #3b82f6, #1e3a8a);
-            --badge-bg: #dbeafe;
-            --badge-text: #1e3a8a;
-            --border-color: #60a5fa;
-            --footer-bg: #1e3a8a;
-        }
-
-        .theme-green {
-            --primary-bg: #16a34a;
-            --primary-gradient: linear-gradient(135deg, #22c55e, #14532d);
-            --badge-bg: #dcfce7;
-            --badge-text: #14532d;
-            --border-color: #4ade80;
-            --footer-bg: #14532d;
-        }
-
-        .theme-dark {
-            --primary-bg: #7c3aed;
-            --primary-gradient: linear-gradient(135deg, #8b5cf6, #3b0764);
-            --badge-bg: #f3e8ff;
-            --badge-text: #581c87;
-            --border-color: #a78bfa;
-            --footer-bg: #3b0764;
-        }
-
-        /* Photo Card Preview Container */
-        #photo-card {
-            width: 500px;
-            height: 600px;
-            position: relative;
-            overflow: hidden;
-            background-color: #0d1117;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
-            flex-shrink: 0;
+            background-color: var(--bg-body);
+            color: #333;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Responsive Preview Scale Container */
-        .preview-wrapper {
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        header h1 {
+            color: #d32f2f;
+            font-size: 26px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 14px;
+            margin-top: 3px;
+        }
+
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1250px;
+            margin: 20px auto;
+            gap: 25px;
+            padding: 0 15px;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* Form Controls Section */
+        .controls-section {
+            flex: 1;
+            min-width: 320px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #111;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #444;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 15px;
+            background-color: #fafafa;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #d32f2f;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            height: 90px;
+        }
+
+        /* File Upload styling */
+        .file-upload-wrapper {
+            position: relative;
+            width: 100%;
+            border: 2px dashed #bbb;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            background: #fafafa;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .file-upload-wrapper:hover {
+            border-color: #d32f2f;
+            background: #fff;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Color Theme Options */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .theme-btn {
+            height: 40px;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .theme-btn.active {
+            border-color: #000;
+            transform: scale(1.02);
+        }
+
+        .theme-red { background-color: #e60000; }
+        .theme-blue { background-color: #0056b3; }
+        .theme-green { background-color: #008744; }
+        .theme-dark { background-color: #222222; }
+
+        /* Zoom and Pan Controls */
+        .img-adjust-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .img-adjust-controls input[type="range"] {
+            flex: 1;
+        }
+
+        /* Preview Section */
+        .preview-section {
+            flex: 1;
+            min-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-container-wrapper {
+            width: 100%;
+            max-width: 500px; /* Responsive Fit Screen limit */
             display: flex;
             justify-content: center;
-            align-items: center;
-            width: 100%;
-            overflow-x: auto;
-            padding: 1rem;
         }
 
-        .card-image-box {
-            height: 350px; /* ~58% of card height */
+        /* Main Photo Card Design */
+        #newsCard {
             width: 100%;
+            aspect-ratio: 1 / 1.15; /* Professional portrait ratio */
+            background-color: #ffffff;
             position: relative;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
-            background-color: #1e293b;
-        }
-
-        #uploaded-img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            max-width: none;
-            cursor: move;
-            transition: transform 0.05s ease-out;
-            user-select: none;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #475569;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
+
+        /* Top 62% Image Area */
+        .card-image-area {
+            height: 62%;
+            width: 100%;
+            position: relative;
+            background-color: #e9ecef;
+            overflow: hidden;
+        }
+
+        .card-image-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: center center;
+        }
+
+        .category-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 4px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 3px;
+            z-index: 2;
+        }
+
+        /* Middle Bar: Brand Logo */
+        .brand-divider-bar {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .brand-title {
+            font-size: 28px; /* Bigger Title as requested */
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        /* Bottom Text Area (Strictly White Background) */
+        .card-content-area {
+            height: 38%;
+            background-color: #ffffff; /* Bright White */
+            color: var(--text-color);
+            padding: 16px 20px 10px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .news-text {
+            font-size: 19px;
+            line-height: 1.45;
+            font-weight: bold;
+            color: #1a1a1a;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Limits to 2-3 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Card Footer */
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eeeeee;
+            padding-top: 8px;
+            margin-top: 5px;
+        }
+
+        .website-url {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: #777777;
+        }
+
+        /* Download Button */
+        .download-btn {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 15px;
+            background-color: #008744;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background-color: #006b35;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .card-container-wrapper {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Header Section -->
-    <header class="bg-slate-900 border-b border-slate-800 py-4 px-6 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center font-bold text-xl text-white shadow-lg">
-                    ড
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold tracking-wide text-white">ডয়েল নিউজ <span class="text-xs bg-red-600/30 text-red-400 px-2 py-0.5 rounded border border-red-500/30">কার্ড জেনারেটর</span></h1>
-                    <p class="text-xs text-slate-400">সহজেই তৈরি করুন প্রফেশনাল নিউজ ফটো কার্ড</p>
-                </div>
-            </div>
-            <a href="https://doyelnews.com" target="_blank" class="hidden sm:flex items-center space-x-2 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-lg transition border border-slate-700">
-                <i class="fa-solid font-bold fa-globe text-red-500"></i>
-                <span>doyelnews.com</span>
-            </a>
-        </div>
+    <header>
+        <h1>ডয়েল নিউজ - ফটো কার্ড জেনারেটর</h1>
+        <p>সহজেই পেশাদার সংবাদের ফটো কার্ড তৈরি ও এইচডি ডাউনলোড করুন</p>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="max-w-7xl mx-auto w-full p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1 items-start">
-        
-        <!-- Left Side: Control Panel Inputs (5 Cols on large screen) -->
-        <section class="lg:col-span-5 bg-slate-900/80 backdrop-blur border border-slate-800 rounded-2xl p-5 md:p-6 shadow-xl space-y-6">
+    <div class="main-container">
+        <!-- Input Form Controls -->
+        <div class="controls-section">
+            <div class="section-title">কার্ড সেটিংস ও বিবরণ</div>
             
-            <div class="border-b border-slate-800 pb-4">
-                <h2 class="text-lg font-semibold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-red-500"></i> কাস্টমাইজ করুন
-                </h2>
-                <p class="text-xs text-slate-400 mt-1">নিচের অপশনগুলো পূরণ করে আপনার ফটো কার্ড তৈরি করুন</p>
+            <div class="form-group">
+                <label for="newsInput">১. আপনার টেক্সটটি লিখুন (২-৩ লাইন)</label>
+                <textarea id="newsInput" placeholder="এখানে আপনার সংবাদের প্রধান শিরোনাম বা বিস্তারিত ৩ লাইনের মধ্যে লিখুন...">রাজধানীতে বৈরী আবহাওয়ার কারণে স্বাভাবিক জনজীবন ব্যাহত; আবহাওয়া অফিসের সতর্কবার্তা জারি।</textarea>
             </div>
 
-            <!-- Input 1: Main Text Headline -->
-            <div class="space-y-2">
-                <label for="news-text-input" class="block text-sm font-medium text-slate-200">
-                    <i class="fa-solid fa-pen-to-square text-slate-400 mr-1"></i> আপনার টেক্সটটি লিখুন (২-৩ লাইন)
-                </label>
-                <textarea id="news-text-input" rows="3" 
-                    class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm text-slate-100 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none resize-none transition"
-                    placeholder="এখানে নিউজের শিরোনাম বা প্রধান অংশটি বাংলায় লিখুন...">রাজধানীতে জাকজমকপূর্ণ আয়োজনে অনুষ্ঠিত হলো বিশেষ সাংস্কৃতিক অনুষ্ঠান</textarea>
-                <div class="flex justify-between items-center text-xs text-slate-400">
-                    <span>ফন্ট সাইজ অ্যাডজাস্ট:</span>
-                    <input type="range" id="font-size-slider" min="16" max="28" value="20" class="w-28 accent-red-500 cursor-pointer">
+            <div class="form-group">
+                <label>২. ছবি আপলোড করুন</label>
+                <div class="file-upload-wrapper">
+                    <span id="uploadText">ছবি নির্বাচন করতে এখানে ক্লিক করুন</span>
+                    <input type="file" id="imageInput" accept="image/*">
+                </div>
+                <!-- Image Adjust Controls -->
+                <div class="img-adjust-controls">
+                    <label style="margin:0; font-size:12px;">জুম:</label>
+                    <input type="range" id="zoomRange" min="1" max="2" step="0.05" value="1">
                 </div>
             </div>
 
-            <!-- Input 2: Image Upload & Controls -->
-            <div class="space-y-3">
-                <label class="block text-sm font-medium text-slate-200">
-                    <i class="fa-solid fa-image text-slate-400 mr-1"></i> ছবি আপলোড করুন
-                </label>
-                
-                <div id="drop-zone" class="border-2 border-dashed border-slate-700 hover:border-red-500 rounded-xl p-4 text-center cursor-pointer bg-slate-950/50 transition">
-                    <input type="file" id="image-upload" accept="image/*" class="hidden">
-                    <i class="fa-solid fa-cloud-arrow-up text-2xl text-slate-400 mb-2"></i>
-                    <p class="text-xs text-slate-300">ছবি সিলেক্ট করতে এখানে ক্লিক করুন অথবা ড্রাগ করে ছাড়ুন</p>
-                    <p class="text-[10px] text-slate-500 mt-1">PNG, JPG, WEBP (সর্বোচ্চ 10MB)</p>
-                </div>
+            <div class="form-group">
+                <label for="categoryInput">৩. ক্যাটাগরি / বিষয় (ঐচ্ছিক)</label>
+                <input type="text" id="categoryInput" value="জাতীয়" placeholder="যেমন: জাতীয়, খেলাধুলো, বিনোদন">
+            </div>
 
-                <!-- Zoom & Position Control sliders -->
-                <div class="bg-slate-950/80 rounded-xl p-3 border border-slate-800 space-y-2">
-                    <div class="flex justify-between items-center text-xs text-slate-300">
-                        <span><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> জুম (Zoom):</span>
-                        <input type="range" id="zoom-slider" min="0.5" max="3" step="0.05" value="1" class="w-32 accent-red-500 cursor-pointer">
-                    </div>
-                    <p class="text-[11px] text-slate-400 italic">💡 টিপস: আপনি ডানপাশের ছবিতে মাউস দিয়ে ড্রাগ করেও ছবি পজিশন করতে পারবেন।</p>
+            <div class="form-group">
+                <label>৪. থিম কালার নির্বাচন করুন</label>
+                <div class="theme-grid">
+                    <button class="theme-btn theme-red active" onclick="setTheme('#e60000', this)">লাল</button>
+                    <button class="theme-btn theme-blue" onclick="setTheme('#0056b3', this)">নীল</button>
+                    <button class="theme-btn theme-green" onclick="setTheme('#008744', this)">সবুজ</button>
+                    <button class="theme-btn theme-dark" onclick="setTheme('#222222', this)">ডার্ক</button>
                 </div>
             </div>
 
-            <!-- Color Theme Selector -->
-            <div class="space-y-2">
-                <label class="block text-sm font-medium text-slate-200">
-                    <i class="fa-solid fa-palette text-slate-400 mr-1"></i> কালার থিম বাছাই করুন
-                </label>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    <button type="button" onclick="setTheme('theme-red')" class="theme-btn border-2 border-red-500 bg-red-600/20 hover:bg-red-600/30 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition">
-                        <span class="w-3 h-3 rounded-full bg-red-600"></span> লাল
-                    </button>
-                    <button type="button" onclick="setTheme('theme-blue')" class="theme-btn border border-slate-700 hover:border-blue-500 bg-blue-600/10 hover:bg-blue-600/20 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition">
-                        <span class="w-3 h-3 rounded-full bg-blue-600"></span> নীল
-                    </button>
-                    <button type="button" onclick="setTheme('theme-green')" class="theme-btn border border-slate-700 hover:border-green-500 bg-green-600/10 hover:bg-green-600/20 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition">
-                        <span class="w-3 h-3 rounded-full bg-green-600"></span> সবুজ
-                    </button>
-                    <button type="button" onclick="setTheme('theme-dark')" class="theme-btn border border-slate-700 hover:border-purple-500 bg-purple-600/10 hover:bg-purple-600/20 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition">
-                        <span class="w-3 h-3 rounded-full bg-purple-600"></span> ডার্ক/লুক্স
-                    </button>
-                </div>
+            <div class="form-group">
+                <label for="dateInput">৫. তারিখ</label>
+                <input type="text" id="dateInput" value="">
             </div>
+        </div>
 
-            <!-- Extra Customization Options -->
-            <div class="space-y-3 pt-2 border-t border-slate-800">
-                <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">অতিরিক্ত অপশনসমূহ</h3>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <!-- Category Dropdown -->
-                    <div>
-                        <label for="category-select" class="block text-xs text-slate-300 mb-1">ক্যাটাগরি ট্যাগ</label>
-                        <select id="category-select" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-slate-200 outline-none focus:border-red-500">
-                            <option value="জাতীয়">জাতীয়</option>
-                            <option value="আন্তর্জাতিক">আন্তর্জাতিক</option>
-                            <option value="খেলাধুলা">খেলাধুলা</option>
-                            <option value="বিনোদন">বিনোদন</option>
-                            <option value="প্রযুক্তি">প্রযুক্তি</option>
-                            <option value="রাজনীতি">রাজনীতি</option>
-                            <option value="অর্থনীতি">অর্থনীতি</option>
-                            <option value="বিশেষ সংবাদ">বিশেষ সংবাদ</option>
-                        </select>
-                    </div>
-
-                    <!-- Date Toggle -->
-                    <div>
-                        <label for="date-input" class="block text-xs text-slate-300 mb-1">তারিখ / সময়</label>
-                        <input type="text" id="date-input" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-slate-200 outline-none focus:border-red-500" value="৪ নভেম্বর, ২০২৬">
-                    </div>
-                </div>
-
-                <!-- Live Breaking Badge Checkbox -->
-                <div class="flex items-center justify-between bg-slate-950/40 p-2.5 rounded-lg border border-slate-800">
-                    <span class="text-xs text-slate-300 font-medium">"লাইভ / ব্রেকিং" ব্যাজ দেখান</span>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="live-badge-toggle" class="sr-only peer" checked>
-                        <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                    </label>
-                </div>
-            </div>
-
-            <!-- HD Download Button -->
-            <div class="pt-2">
-                <button id="download-btn" onclick="downloadHDCard()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-900/30 flex items-center justify-center space-x-2 transition transform active:scale-[0.99]">
-                    <i class="fa-solid fa-circle-down text-lg"></i>
-                    <span class="text-base">এইচডি ফটো কার্ড ডাউনলোড করুন (HD PNG)</span>
-                </button>
-            </div>
-
-        </section>
-
-        <!-- Right Side: Live Canvas Preview Area (7 Cols on large screen) -->
-        <section class="lg:col-span-7 flex flex-col items-center justify-start space-y-4">
+        <!-- Live Fit Screen Preview -->
+        <div class="preview-section">
+            <div class="section-title" style="width:100%; text-align:center;">কার্ড প্রিভিউ</div>
             
-            <div class="w-full flex justify-between items-center bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-                <span class="text-xs font-semibold text-slate-300 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> লাইভ প্রিভিউ (Live Preview)
-                </span>
-                <span class="text-[11px] text-slate-400">সাইজ: 1000x1200 px (HD Ready)</span>
-            </div>
-
-            <!-- Card Outer Scaled Wrapper -->
-            <div class="preview-wrapper w-full">
-                
-                <!-- The Photo Card Element to capture -->
-                <div id="photo-card" class="theme-red shadow-2xl rounded-lg">
-                    
-                    <!-- Top Section: Uploaded Image Canvas (~60% height) -->
-                    <div class="card-image-box">
-                        <img id="uploaded-img" src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80" alt="News Image">
-                        
-                        <!-- Overlay Tag (Live/Breaking) -->
-                        <div id="card-live-badge" class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md flex items-center gap-1.5 uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-                            <span>ব্রেকিং নিউজ</span>
-                        </div>
-
-                        <!-- Category Badge -->
-                        <div id="card-category" class="absolute bottom-3 left-4 bg-black/70 backdrop-blur text-slate-100 text-xs font-semibold px-3 py-1 rounded-md border border-white/20">
-                            জাতীয়
-                        </div>
+            <div class="card-container-wrapper">
+                <div id="newsCard">
+                    <!-- Top Image Section -->
+                    <div class="card-image-area">
+                        <span class="category-tag" id="cardCategory">জাতীয়</span>
+                        <img id="cardImage" src="https://via.placeholder.com/600x400/e0e0e0/888888?text=%E0%A6%9B%E0%A6%AC%E0%A6%BF+%E0%A6%86%E0%A6%AA%E0%A6%B2%E0%A7%8B%E0%A6%A1+%E0%A6%95%E0%A6%B0%E0%A7%81%E0%A6%A8" alt="News Image">
                     </div>
 
-                    <!-- Brand Header Section (Middle Divider) -->
-                    <div class="relative bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 px-5 py-2.5 border-t-4 flex items-center justify-between" style="border-color: var(--primary-bg);">
-                        <div class="flex items-center space-x-2">
-                            <!-- Doyel Logo Icon -->
-                            <div class="w-8 h-8 rounded-lg flex items-center justify-center font-black text-lg text-white shadow" style="background: var(--primary-gradient);">
-                                ড
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="text-xl font-bold text-white tracking-wide leading-none">ডয়েল নিউজ</span>
-                                <span class="text-[9px] text-slate-400 tracking-wider">সত্যের সন্ধানে অনুক্ষণ</span>
-                            </div>
-                        </div>
-
-                        <!-- Decorative Emblem -->
-                        <div class="text-[10px] uppercase font-bold px-2 py-0.5 rounded border" style="background-color: var(--badge-bg); color: var(--badge-text); border-color: var(--border-color);">
-                            Doyel Photo Card
-                        </div>
+                    <!-- Middle Branding Title -->
+                    <div class="brand-divider-bar">
+                        <div class="brand-title">ডয়েল নিউজ</div>
                     </div>
 
-                    <!-- Middle-Bottom Section: News Text Area -->
-                    <div class="flex-1 bg-slate-950 p-5 flex items-center justify-center relative overflow-hidden">
-                        <!-- Background subtle watermark pattern -->
-                        <div class="absolute inset-0 opacity-5 pointer-events-none flex items-center justify-center text-slate-100 font-bold text-6xl">
-                            DOYEL
+                    <!-- Bottom Content Section (White Background) -->
+                    <div class="card-content-area">
+                        <div class="news-text" id="cardText">
+                            রাজধানীতে বৈরী আবহাওয়ার কারণে স্বাভাবিক জনজীবন ব্যাহত; আবহাওয়া অফিসের সতর্কবার্তা জারি।
                         </div>
-
-                        <p id="card-text-display" class="text-slate-100 font-medium leading-relaxed text-center relative z-10 w-full px-2" style="font-size: 20px;">
-                            রাজধানীতে জাকজমকপূর্ণ আয়োজনে অনুষ্ঠিত হলো বিশেষ সাংস্কৃতিক অনুষ্ঠান
-                        </p>
-                    </div>
-
-                    <!-- Bottom Footer Section -->
-                    <div class="px-5 py-2.5 flex items-center justify-between text-xs text-slate-300 font-sans border-t border-slate-800/80" style="background-color: var(--footer-bg);">
-                        <div class="flex items-center space-x-1.5 font-semibold text-white">
-                            <i class="fa-solid fa-globe text-slate-200"></i>
-                            <span>doyelnews.com</span>
-                        </div>
-                        <div id="card-date-display" class="text-[11px] text-slate-200 font-bengali">
-                            ৪ নভেম্বর, ২০২৬
+                        <div class="card-footer">
+                            <span class="website-url">doyelnews.com</span>
+                            <span class="news-date" id="cardDate"></span>
                         </div>
                     </div>
-
                 </div>
-
             </div>
 
-        </section>
+            <!-- Download Button -->
+            <button class="download-btn" onclick="downloadCard()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                এইচডি কার্ড ডাউনলোড করুন
+            </button>
+        </div>
+    </div>
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800/60 py-4 text-center text-xs text-slate-500">
-        <p>© ২০২৬ ডয়েল নিউজ (doyelnews.com) - সর্বস্বত্ব সংরক্ষিত।</p>
-    </footer>
-
-    <!-- JavaScript Logic -->
     <script>
-        // DOM Elements
-        const newsTextInput = document.getElementById('news-text-input');
-        const cardTextDisplay = document.getElementById('card-text-display');
-        const fontSizeSlider = document.getElementById('font-size-slider');
-        
-        const imageUpload = document.getElementById('image-upload');
-        const dropZone = document.getElementById('drop-zone');
-        const uploadedImg = document.getElementById('uploaded-img');
-        const zoomSlider = document.getElementById('zoom-slider');
-        
-        const categorySelect = document.getElementById('category-select');
-        const cardCategory = document.getElementById('card-category');
-        
-        const dateInput = document.getElementById('date-input');
-        const cardDateDisplay = document.getElementById('card-date-display');
-        
-        const liveBadgeToggle = document.getElementById('live-badge-toggle');
-        const cardLiveBadge = document.getElementById('card-live-badge');
-        
-        const photoCard = document.getElementById('photo-card');
+        // Set Default Date in Bengali
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const today = new Date().toLocaleDateString('bn-BD', options);
+        document.getElementById('dateInput').value = today;
+        document.getElementById('cardDate').innerText = today;
 
-        // 1. Text Input Event Listener
-        newsTextInput.addEventListener('input', (e) => {
-            cardTextDisplay.innerText = e.target.value || 'এখানে আপনার নিউজের শিরোনাম প্রদর্শিত হবে...';
+        // Dynamic Text Inputs Update
+        document.getElementById('newsInput').addEventListener('input', function() {
+            document.getElementById('cardText').innerText = this.value || 'আপনার সংবাদের বিস্তারিত বিবরণ এখানে দেখাবে।';
         });
 
-        // Font Size Slider
-        fontSizeSlider.addEventListener('input', (e) => {
-            cardTextDisplay.style.fontSize = `${e.target.value}px`;
-        });
-
-        // 2. Category Select
-        categorySelect.addEventListener('change', (e) => {
-            cardCategory.innerText = e.target.value;
-        });
-
-        // 3. Date Input
-        dateInput.addEventListener('input', (e) => {
-            cardDateDisplay.innerText = e.target.value;
-        });
-
-        // 4. Live Badge Toggle
-        liveBadgeToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                cardLiveBadge.style.display = 'flex';
+        document.getElementById('categoryInput').addEventListener('input', function() {
+            const catElem = document.getElementById('cardCategory');
+            if (this.value.trim() === '') {
+                catElem.style.display = 'none';
             } else {
-                cardLiveBadge.style.display = 'none';
+                catElem.style.display = 'inline-block';
+                catElem.innerText = this.value;
             }
         });
 
-        // 5. Image Upload & Drag-and-Drop Handling
-        dropZone.addEventListener('click', () => imageUpload.click());
-
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('border-red-500', 'bg-slate-900');
+        document.getElementById('dateInput').addEventListener('input', function() {
+            document.getElementById('cardDate').innerText = this.value;
         });
 
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('border-red-500', 'bg-slate-900');
-        });
+        // Image Upload & Zoom Logic
+        const imageInput = document.getElementById('imageInput');
+        const cardImage = document.getElementById('cardImage');
+        const zoomRange = document.getElementById('zoomRange');
 
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('border-red-500', 'bg-slate-900');
-            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-                handleImageFile(e.dataTransfer.files[0]);
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    cardImage.src = event.target.result;
+                    document.getElementById('uploadText').innerText = file.name;
+                };
+                reader.readAsDataURL(file);
             }
         });
 
-        imageUpload.addEventListener('change', (e) => {
-            if (e.target.files && e.target.files[0]) {
-                handleImageFile(e.target.files[0]);
-            }
+        zoomRange.addEventListener('input', function() {
+            cardImage.style.transform = `scale(${this.value})`;
         });
 
-        function handleImageFile(file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                uploadedImg.src = e.target.result;
-                resetImagePosition();
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // Image Zoom & Pan Controls
-        let imgScale = 1;
-        let imgPosX = -50; // In translate percentage (-50% default)
-        let imgPosY = -50;
-        let isDragging = false;
-        let startX, startY;
-
-        function updateImageTransform() {
-            uploadedImg.style.transform = `translate(${imgPosX}%, ${imgPosY}%) scale(${imgScale})`;
-        }
-
-        function resetImagePosition() {
-            imgScale = 1;
-            imgPosX = -50;
-            imgPosY = -50;
-            zoomSlider.value = 1;
-            updateImageTransform();
-        }
-
-        zoomSlider.addEventListener('input', (e) => {
-            imgScale = parseFloat(e.target.value);
-            updateImageTransform();
-        });
-
-        // Mouse Drag to Pan Image inside card
-        const imgBox = document.querySelector('.card-image-box');
-
-        imgBox.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX;
-            startY = e.clientY;
-            imgBox.style.cursor = 'grabbing';
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            const dx = e.clientX - startX;
-            const dy = e.clientY - startY;
-
-            // Adjust pixel movement into translate percentage based on container size
-            imgPosX += (dx / imgBox.clientWidth) * 100;
-            imgPosY += (dy / imgBox.clientHeight) * 100;
-
-            startX = e.clientX;
-            startY = e.clientY;
-
-            updateImageTransform();
-        });
-
-        window.addEventListener('mouseup', () => {
-            if (isDragging) {
-                isDragging = false;
-                imgBox.style.cursor = 'default';
-            }
-        });
-
-        // 6. Theme Switching Function
-        function setTheme(themeName) {
-            photoCard.className = 'shadow-2xl rounded-lg ' + themeName;
+        // Color Theme Changer
+        function setTheme(color, btn) {
+            document.documentElement.style.setProperty('--primary-color', color);
             
-            // Update button styles visually
-            document.querySelectorAll('.theme-btn').forEach(btn => {
-                btn.classList.remove('border-2', 'border-red-500');
-                btn.classList.add('border', 'border-slate-700');
-            });
-            event.currentTarget.classList.remove('border-slate-700');
-            event.currentTarget.classList.add('border-2', 'border-red-500');
+            // Remove active class from buttons
+            const buttons = document.querySelectorAll('.theme-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            
+            // Add active class to clicked button
+            btn.classList.add('active');
         }
 
-        // 7. HD Card Download using html2canvas
-        function downloadHDCard() {
-            const downloadBtn = document.getElementById('download-btn');
-            const originalBtnContent = downloadBtn.innerHTML;
-
-            // Show loading state
-            downloadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-lg"></i> <span>প্রসেসিং হচ্ছে...</span>`;
-            downloadBtn.disabled = true;
-
-            // Temporary scale up for HD render
-            html2canvas(photoCard, {
-                scale: 2, // 2x scale for crisp high definition PNG output
+        // HD Download Function using html2canvas
+        function downloadCard() {
+            const card = document.getElementById('newsCard');
+            
+            // Temporary scale up for HD quality download
+            html2canvas(card, {
+                scale: 2, // 2x high definition resolution
                 useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                logging: false
+                logging: false,
+                backgroundColor: "#ffffff"
             }).then(canvas => {
-                // Create download link
-                const image = canvas.toDataURL("image/png");
                 const link = document.createElement('a');
-                const timestamp = new Date().getTime();
-                link.download = `doyel-news-card-${timestamp}.png`;
-                link.href = image;
+                link.download = `doyelnews-card-${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
-
-                // Restore Button State
-                downloadBtn.innerHTML = originalBtnContent;
-                downloadBtn.disabled = false;
-            }).catch(err => {
-                console.error('Error generating HD image:', err);
-                alert('দুঃখিত, ছবিটি ডাউনলোড করার সময় একটি সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-                downloadBtn.innerHTML = originalBtnContent;
-                downloadBtn.disabled = false;
             });
         }
     </script>
 </body>
-</html>
+                                                                                                                                                                                             </html>
