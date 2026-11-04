@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রেট দ্যা বুক</title>
+    <title>রেট দ্য বুক - তিন গোয়েন্দা বুক রেটিং</title>
+    <!-- html2canvas Library for downloading card as PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --bg-color: #f4f6f9;
+            --bg-color: #f0f4f8;
             --card-bg: #ffffff;
-            --primary-color: #2b3a4a;
-            --accent-color: #1a73e8;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
+            --primary-color: #1b365d;
+            --theme-color: #1a73e8;
+            --theme-border: #1a73e8;
+            --text-color: #2c3e50;
+            --border-color: #e2e8f0;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Kalpurush', 'Siyam Rupali';
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Kalpurush', 'Siyam Rupali', sans-serif;
         }
 
         body {
@@ -33,10 +36,10 @@
 
         .app-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 550px;
             background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             padding: 25px;
         }
 
@@ -52,21 +55,22 @@
             color: var(--primary-color);
             text-align: center;
             margin-bottom: 15px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         p {
             line-height: 1.6;
             margin-bottom: 15px;
-            color: #555;
+            color: #4a5568;
         }
 
         .instructions {
-            background: #f8f9fa;
-            border-left: 4px solid var(--accent-color);
-            padding: 15px;
-            border-radius: 4px;
+            background: #f8fafc;
+            border-left: 4px solid var(--theme-color);
+            padding: 18px;
+            border-radius: 8px;
             margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .instructions ol {
@@ -74,81 +78,92 @@
         }
 
         .instructions li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            color: #4a5568;
         }
 
         .btn {
             display: block;
             width: 100%;
-            padding: 12px 20px;
-            background: var(--accent-color);
+            padding: 14px 20px;
+            background: var(--theme-color);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             margin-bottom: 12px;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
             text-align: center;
         }
 
         .btn:hover {
             opacity: 0.92;
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
-            background: #6c757d;
+            background: #64748b;
+        }
+
+        .btn-success {
+            background: #10b981;
         }
 
         .book-display {
             text-align: center;
-            padding: 30px 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
+            padding: 35px 20px;
+            background: #f8fafc;
+            border-radius: 12px;
             margin-bottom: 20px;
-            border: 1px solid var(--border-color);
+            border: 2px dashed #cbd5e1;
         }
 
         .book-title {
-            font-size: 24px;
+            font-size: 26px;
             color: var(--primary-color);
-            margin-top: 10px;
-            font-weight: bold;
+            margin-top: 12px;
+            font-weight: 700;
         }
 
         .question-group {
             margin-bottom: 20px;
-            background: #fafafa;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #eee;
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
 
         .question-title {
             font-size: 15px;
-            margin-bottom: 10px;
-            color: #444;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #334155;
         }
 
         .rating-buttons {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .rate-btn {
             flex: 1;
-            padding: 8px;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 10px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #475569;
+            transition: all 0.2s;
         }
 
         .rate-btn.selected {
-            background: var(--accent-color);
+            background: var(--theme-color);
             color: white;
-            border-color: var(--accent-color);
+            border-color: var(--theme-color);
         }
 
         .input-group {
@@ -158,128 +173,169 @@
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
+            font-weight: 600;
+            color: #334155;
         }
 
         .input-group input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             font-size: 16px;
+            outline: none;
         }
 
-        /* Color Theme Options */
+        .input-group input:focus {
+            border-color: var(--theme-color);
+        }
+
+        /* Color Picker Options */
+        .color-picker-wrapper {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .color-picker-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #64748b;
+        }
         .color-picker {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             justify-content: center;
-            margin-bottom: 20px;
         }
 
         .color-option {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 1px #cbd5e1;
+            transition: transform 0.2s;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
         }
 
         .color-option.selected {
-            border-color: #000;
+            box-shadow: 0 0 0 2px #000000;
         }
 
-        /* Card Canvas Styling */
+        /* Styling for the Photo Card */
         .card-wrapper {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
-            overflow: hidden;
         }
 
         .photo-card {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             background: #ffffff;
-            border: 2px solid var(--theme-border, #1a73e8);
-            border-radius: 12px;
+            border: 3px solid var(--theme-border, #1a73e8);
+            border-radius: 16px;
             padding: 25px 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
             text-align: center;
             position: relative;
         }
 
         .card-header {
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 800;
             color: var(--theme-color, #1a73e8);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
             margin-bottom: 15px;
         }
 
         .card-book-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #222;
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
             margin-bottom: 15px;
+            line-height: 1.3;
         }
 
-        .card-score {
-            font-size: 36px;
-            font-weight: bold;
-            color: var(--theme-color, #1a73e8);
-            margin: 10px 0;
+        .score-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
         }
 
         .card-score-label {
             font-size: 13px;
-            color: #777;
-            margin-bottom: 15px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .card-score {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--theme-color, #1a73e8);
         }
 
         .card-details {
             text-align: left;
-            background: #fafafa;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 13px;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 14px;
             margin-bottom: 15px;
         }
 
         .card-details p {
-            margin-bottom: 5px;
-            color: #444;
+            margin-bottom: 8px;
+            color: #334155;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-details p:last-child {
+            margin-bottom: 0;
         }
 
         .card-footer {
-            font-size: 12px;
-            color: #666;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
             margin-top: 15px;
-            border-top: 1px dashed #ddd;
-            padding-top: 10px;
+            border-top: 2px dashed #e2e8f0;
+            padding-top: 12px;
         }
 
-        /* Caption Section */
+        /* Caption Text Area */
         .caption-section {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
             margin-top: 20px;
         }
 
         .caption-box {
             width: 100%;
-            height: 160px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 13px;
+            height: 170px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
             resize: none;
-            background: #fff;
+            background: #ffffff;
             margin-bottom: 10px;
             white-space: pre-wrap;
+            line-height: 1.5;
+            color: #334155;
         }
     </style>
 </head>
@@ -289,35 +345,35 @@
 
     <!-- Step 1: Instructions -->
     <div id="screen-instructions" class="screen active">
-        <h1>Read the Book</h1>
+        <h1>রেট দ্য বুক</h1>
         <div class="instructions">
             <h3>নির্দেশাবলী:</h3>
             <ol>
-                <li>নিচে <b>"Start"</b> বাটনে ক্লিক করে রেটিং প্রক্রিয়া শুরু করুন।</li>
-                <li>তিন গোয়েন্দা সিরিজের ১৬০টি বই থেকে র‍্যান্ডমলি একটি বই বেছে নেওয়া হবে।</li>
-                <li>বইটি যদি আপনার পড়া হয়ে থাকে তবে রেটিং সেকশনে যান, না পড়া থাকলে পরবর্তী বই সিলেক্ট করুন।</li>
-                <li>নির্দিষ্ট ৩টি প্রশ্নের উত্তর দিন এবং ১ থেকে ৫ স্টার রেটিং সিলেক্ট করুন।</li>
-                <li>আপনার নাম লিখে অটোমেটিক রেটিং ফোটো কার্ড এবং ক্যাপশন জেনারেট করুন।</li>
+                <li>নিচে <b>"শুরু করুন"</b> বাটনে ক্লিক করে রেটিং প্রক্রিয়া শুরু করুন।</li>
+                <li>তিন গোয়েন্দা সিরিজের ১৬০টি বই থেকে একটি বই র‍্যান্ডমলি বেছে নেওয়া হবে।</li>
+                <li>বইটি পড়া হয়ে থাকলে রেটিং দিন, পড়া না থাকলে অন্য বই সিলেক্ট করুন।</li>
+                <li>৩টি সহজ প্রশ্নের জন্য ১ থেকে ৫ পর্যন্ত রেটিং সিলেক্ট করুন।</li>
+                <li>আপনার নাম লিখে ডাউনলোডযোগ্য সুন্দর রেটিং ফোটো কার্ড এবং কপি করার ক্যাপশন পান।</li>
             </ol>
         </div>
-        <button class="btn" onclick="startProcess()">Start</button>
+        <button class="btn" onclick="startProcess()">শুরু করুন</button>
     </div>
 
-    <!-- Step 2: Book Selection -->
+    <!-- Step 2: Random Book Selection -->
     <div id="screen-selection" class="screen">
         <h2>বই নির্বাচন</h2>
         <div class="book-display">
             <p>আপনার জন্য নির্বাচিত বই:</p>
             <div id="displayed-book-title" class="book-title">...</div>
         </div>
-        <button class="btn" onclick="goToRating()">I have read this book and want to rate it</button>
-        <button class="btn btn-secondary" onclick="pickRandomBook()">I have not read this book, please select another book</button>
+        <button class="btn" onclick="goToRating()">আমি বইটি পড়েছি এবং রেটিং দিতে চাই</button>
+        <button class="btn btn-secondary" onclick="pickRandomBook()">আমি বইটি পড়িনি, অন্য একটি বই বেছে দিন</button>
     </div>
 
     <!-- Step 3: Rating Form -->
     <div id="screen-rating" class="screen">
-        <h2>রেটিং প্রদান করুন</h2>
-        <p style="text-align: center; font-weight: bold;" id="rating-book-name"></p>
+        <h2>রেটিং দিন</h2>
+        <p style="text-align: center; font-weight: bold; color: var(--theme-color); font-size: 18px; margin-bottom: 15px;" id="rating-book-name"></p>
         
         <div class="question-group">
             <div class="question-title">১. বইটি কি তিন গোয়েন্দা সিরিজের সাথে মানানসই?</div>
@@ -353,22 +409,25 @@
         </div>
 
         <div class="input-group">
-            <label for="user-name">আপনার নাম (বাধ্যতামূলক):</label>
+            <label for="user-name">রিভিউ দাতার নাম (বাধ্যতামূলক):</label>
             <input type="text" id="user-name" placeholder="আপনার নাম লিখুন">
         </div>
 
-        <button class="btn" onclick="generateCard()">Generate Rating Card</button>
+        <button class="btn" onclick="generateCard()">রেটিং কার্ড তৈরি করুন</button>
     </div>
 
-    <!-- Step 4: Card Display & Caption -->
+    <!-- Step 4: Photo Card & Caption Screen -->
     <div id="screen-result" class="screen">
         <h2>রেটিং কার্ড</h2>
 
-        <div class="color-picker">
-            <div class="color-option selected" style="background: #1a73e8;" onclick="changeTheme('#1a73e8', this)"></div>
-            <div class="color-option" style="background: #d93025;" onclick="changeTheme('#d93025', this)"></div>
-            <div class="color-option" style="background: #1e8e3e;" onclick="changeTheme('#1e8e3e', this)"></div>
-            <div class="color-option" style="background: #2d3748;" onclick="changeTheme('#2d3748', this)"></div>
+        <div class="color-picker-wrapper">
+            <div class="color-picker-label">কার্ডের কালার থিম বেছে নিন:</div>
+            <div class="color-picker">
+                <div class="color-option selected" style="background: #1a73e8;" onclick="changeTheme('#1a73e8', this)"></div>
+                <div class="color-option" style="background: #dc2626;" onclick="changeTheme('#dc2626', this)"></div>
+                <div class="color-option" style="background: #16a34a;" onclick="changeTheme('#16a34a', this)"></div>
+                <div class="color-option" style="background: #1e293b;" onclick="changeTheme('#1e293b', this)"></div>
+            </div>
         </div>
 
         <div class="card-wrapper">
@@ -376,14 +435,16 @@
                 <div class="card-header">রেট দ্য বুক</div>
                 <div class="card-book-title" id="card-book-name">বইয়ের নাম</div>
                 
-                <div class="card-score-label">গড় রেটিং</div>
-                <div class="card-score" id="card-avg-score">0.0 / 5</div>
+                <div class="score-box">
+                    <div class="card-score-label">ব্যক্তিগত রেটিং</div>
+                    <div class="card-score" id="card-avg-score">0.0 / 5</div>
+                </div>
 
                 <div class="card-details">
-                    <p><b>রেটিং দাতার নাম:</b> <span id="card-reviewer-name"></span></p>
-                    <p><b>১. সিরিজের সাথে মানানসই:</b> <span id="card-q1-score"></span>/5</p>
-                    <p><b>২. রহস্য ও গোয়েন্দাগিরি:</b> <span id="card-q2-score"></span>/5</p>
-                    <p><b>৩. গল্প ও পড়ার অভিজ্ঞতা:</b> <span id="card-q3-score"></span>/5</p>
+                    <p><b>রিভিউ দাতার নাম:</b> <span id="card-reviewer-name"></span></p>
+                    <p><span>১. সিরিজের সাথে মানানসই:</span> <b><span id="card-q1-score"></span>/5</b></p>
+                    <p><span>২. রহস্য ও গোয়েন্দাগিরি:</span> <b><span id="card-q2-score"></span>/5</b></p>
+                    <p><span>৩. গল্প ও পড়ার অভিজ্ঞতা:</span> <b><span id="card-q3-score"></span>/5</b></p>
                 </div>
 
                 <div class="card-footer">
@@ -392,10 +453,12 @@
             </div>
         </div>
 
+        <button class="btn btn-success" onclick="downloadCard()">ফটো কার্ড ডাউনলোড করুন</button>
+
         <div class="caption-section">
-            <p style="font-weight: bold; margin-bottom: 8px;">আপনার পোস্টের জন্য ক্যাপশনটি এখন থেকে সংগ্রহ করুন:</p>
+            <p style="font-weight: 600; margin-bottom: 8px;">আপনার পোস্টের জন্য ক্যাপশনটি এখন থেকে সংগ্রহ করুন:</p>
             <textarea id="caption-text" class="caption-box" readonly></textarea>
-            <button class="btn btn-secondary" onclick="copyCaption()">Copy Caption</button>
+            <button class="btn btn-secondary" onclick="copyCaption()">ক্যাপশন কপি করুন</button>
         </div>
 
         <button class="btn" style="margin-top: 15px;" onclick="resetApp()">নতুন বই রেট করুন</button>
@@ -465,12 +528,12 @@
     function generateCard() {
         const name = document.getElementById('user-name').value.trim();
         if (!name) {
-            alert("অনুগ্রহ করে আপনার নাম লিখুন।");
+            alert("অনুগ্রহ করে রিভিউ দাতার নাম লিখুন।");
             return;
         }
 
         if (!ratings.q1 || !ratings.q2 || !ratings.q3) {
-            alert("অনুগ্রহ করে সবকটি প্রশ্নের রেটিং প্রদান করুন।");
+            alert("অনুগ্রহ করে ৩টি প্রশ্নেরই রেটিং দিন।");
             return;
         }
 
@@ -483,8 +546,8 @@
         document.getElementById('card-q2-score').innerText = ratings.q2;
         document.getElementById('card-q3-score').innerText = ratings.q3;
 
-        // Construct Caption exactly as specified
-        const caption = `#রেট_দ্যা_বুক\n\nRating data's name: ${selectedBook}\nByaktigoto rating: ${avgScore}/5\n\n১. সিরিজের সাথে মানানসই: ${ratings.q1}/5\n২. রহস্য ও গোয়েন্দাগিরি: ${ratings.q2}/5\n৩. গল্প ও পড়ার অভিজ্ঞতা: ${ratings.q3}/5\n\n<Porobortite apnar nijer onubhuti ekhane kichu line e likhun>`;
+        // Structured Caption Format
+        const caption = `#রেট_দ্যা_বুক\n\nবইয়ের নাম: ${selectedBook}\nরিভিউ দাতার নাম: ${name}\nব্যক্তিগত রেটিং: ${avgScore}/5\n\n১. সিরিজের সাথে মানানসই: ${ratings.q1}/5\n২. রহস্য ও গোয়েন্দাগিরি: ${ratings.q2}/5\n৩. গল্প ও পড়ার অভিজ্ঞতা: ${ratings.q3}/5\n\n<পরবর্তীতে আপনার নিজের অনুভূতি এখানে কিছু লাইনে লিখুন>`;
         
         document.getElementById('caption-text').value = caption;
 
@@ -506,6 +569,16 @@
         alert("ক্যাপশন কপি করা হয়েছে!");
     }
 
+    function downloadCard() {
+        const cardContainer = document.getElementById('photo-card');
+        html2canvas(cardContainer, { scale: 2 }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = `${selectedBook}-Rating-Card.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    }
+
     function resetApp() {
         showScreen('screen-selection');
         pickRandomBook();
@@ -513,4 +586,4 @@
 </script>
 
 </body>
-</html>
+    </html>
