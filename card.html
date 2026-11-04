@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>তিন গোয়েন্দা - আইডি কার্ড জেনারেটর</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- html2canvas for Download Feature -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #2b3a4a;
+            --accent-color: #e63946;
+            --bg-light: #f8f9fa;
+            --card-accent: #e63946;
+            --card-light-bg: rgba(230, 57, 70, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .form-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .preview-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #e1e4e8;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4a90e2;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .color-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .color-btn.active {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+
+        /* Business Card Base Styles (Standard 3.5" x 2" ratio = 350px x 200px) */
+        .card-wrapper {
+            width: 350px;
+            height: 200px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 1px solid #eaeaea;
+            transition: all 0.3s ease;
+        }
+
+        /* Minimal Subtle Accent Design */
+        .card-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--card-accent);
+        }
+
+        .card-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: var(--card-light-bg);
+            z-index: 1;
+        }
+
+        .card-content {
+            z-index: 2;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-title {
+            font-family: 'Anek Bangla', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--card-accent);
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .card-question-marks {
+            font-family: 'Anek Bangla', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--card-accent);
+            margin-top: -2px;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .card-members {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 100%;
+            font-family: 'Anek Bangla', sans-serif;
+        }
+
+        .member-line {
+            font-size: 0.88rem;
+            color: #333333;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .member-role {
+            font-weight: 600;
+            color: #444444;
+        }
+
+        .member-name {
+            font-weight: 400;
+            color: #222222;
+        }
+
+        .download-btn {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: #1a2530;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Form Section -->
+        <div class="form-section">
+            <h2>কার্ড জেনারেটর</h2>
+            
+            <div class="input-group">
+                <label for="chief">গোয়েন্দা প্রধান</label>
+                <input type="text" id="chief" value="কিশোর পাশা" placeholder="নাম লিখুন">
+            </div>
+
+            <div class="input-group">
+                <label for="assistant">সহকারী গোয়েন্দা</label>
+                <input type="text" id="assistant" value="রবিন মিলফোর্ড" placeholder="নাম লিখুন">
+            </div>
+
+            <div class="input-group">
+                <label for="researcher">নথিগবেষক</label>
+                <input type="text" id="researcher" value="মুসা আমান" placeholder="নাম লিখুন">
+            </div>
+
+            <div class="input-group">
+                <label>রং সিলেক্ট করুন</label>
+                <div class="color-options">
+                    <button class="color-btn active" style="background-color: #e63946;" data-color="#e63946" data-light="rgba(230, 57, 70, 0.06)" title="লাল"></button>
+                    <button class="color-btn" style="background-color: #1d3557;" data-color="#1d3557" data-light="rgba(29, 53, 87, 0.06)" title="নীল"></button>
+                    <button class="color-btn" style="background-color: #2a9d8f;" data-color="#2a9d8f" data-light="rgba(42, 157, 143, 0.06)" title="সবুজ"></button>
+                    <button class="color-btn" style="background-color: #6a0dad;" data-color="#6a0dad" data-light="rgba(106, 13, 173, 0.06)" title="বেগুনি"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section">
+            <div class="card-wrapper" id="visitingCard">
+                <div class="card-content">
+                    <div class="card-title">তিন গোয়েন্দা</div>
+                    <div class="card-question-marks">???</div>
+                    <div class="card-members">
+                        <div class="member-line">
+                            <span class="member-role">গোয়েন্দা প্রধান :</span>
+                            <span class="member-name" id="previewChief">কিশোর পাশা</span>
+                        </div>
+                        <div class="member-line">
+                            <span class="member-role">সহকারী গোয়েন্দা :</span>
+                            <span class="member-name" id="previewAssistant">রবিন মিলফোর্ড</span>
+                        </div>
+                        <div class="member-line">
+                            <span class="member-role">নথিগবেষক :</span>
+                            <span class="member-name" id="previewResearcher">মুসা আমান</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="download-btn" id="downloadBtn">কার্ড ডাউনলোড করুন</button>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const chiefInput = document.getElementById('chief');
+        const assistantInput = document.getElementById('assistant');
+        const researcherInput = document.getElementById('researcher');
+
+        const previewChief = document.getElementById('previewChief');
+        const previewAssistant = document.getElementById('previewAssistant');
+        const previewResearcher = document.getElementById('previewResearcher');
+
+        const colorBtns = document.querySelectorAll('.color-btn');
+        const cardWrapper = document.getElementById('visitingCard');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Live Text Update Event Listeners
+        chiefInput.addEventListener('input', (e) => {
+            previewChief.textContent = e.target.value || '';
+        });
+
+        assistantInput.addEventListener('input', (e) => {
+            previewAssistant.textContent = e.target.value || '';
+        });
+
+        researcherInput.addEventListener('input', (e) => {
+            previewResearcher.textContent = e.target.value || '';
+        });
+
+        // Color Selection Logic
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                colorBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const selectedColor = btn.getAttribute('data-color');
+                const lightBg = btn.getAttribute('data-light');
+
+                // Update CSS variables for card styling
+                cardWrapper.style.setProperty('--card-accent', selectedColor);
+                cardWrapper.style.setProperty('--card-light-bg', lightBg);
+                cardWrapper.style.backgroundColor = lightBg; // Light tint applied to white background
+            });
+        });
+
+        // Download as Image Feature
+        downloadBtn.addEventListener('click', () => {
+            html2canvas(cardWrapper, {
+                scale: 3, // High DPI download
+                backgroundColor: "#ffffff"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'tin-goyenda-card.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+    </script>
+</body>
+  </html>
