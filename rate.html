@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>রেট দ্য বুক - তিন গোয়েন্দা বুক রেটিং</title>
-    <!-- html2canvas Library for downloading card as PNG -->
+    <!-- Hind Siliguri Bengali Font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- html2canvas Library for PNG Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <style>
         :root {
             --bg-color: #f0f4f8;
@@ -13,6 +19,7 @@
             --primary-color: #1b365d;
             --theme-color: #1a73e8;
             --theme-border: #1a73e8;
+            --theme-bg-light: #eff6ff;
             --text-color: #2c3e50;
             --border-color: #e2e8f0;
         }
@@ -21,7 +28,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Kalpurush', 'Siyam Rupali', sans-serif;
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         body {
@@ -38,7 +45,7 @@
             width: 100%;
             max-width: 550px;
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             padding: 25px;
         }
@@ -66,9 +73,9 @@
 
         .instructions {
             background: #f8fafc;
-            border-left: 4px solid var(--theme-color);
+            border-left: 5px solid var(--theme-color);
             padding: 18px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 25px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
@@ -80,6 +87,7 @@
         .instructions li {
             margin-bottom: 10px;
             color: #4a5568;
+            font-size: 15px;
         }
 
         .btn {
@@ -89,8 +97,8 @@
             background: var(--theme-color);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 10px;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
             margin-bottom: 12px;
@@ -115,28 +123,29 @@
             text-align: center;
             padding: 35px 20px;
             background: #f8fafc;
-            border-radius: 12px;
+            border-radius: 14px;
             margin-bottom: 20px;
             border: 2px dashed #cbd5e1;
         }
 
         .book-title {
-            font-size: 26px;
+            font-size: 28px;
             color: var(--primary-color);
-            margin-top: 12px;
+            margin-top: 10px;
             font-weight: 700;
+            line-height: 1.3;
         }
 
         .question-group {
             margin-bottom: 20px;
             background: #f8fafc;
             padding: 16px;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
         }
 
         .question-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 12px;
             color: #334155;
@@ -152,9 +161,9 @@
             padding: 10px;
             background: #ffffff;
             border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             color: #475569;
             transition: all 0.2s;
@@ -181,7 +190,7 @@
             width: 100%;
             padding: 12px;
             border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
             outline: none;
         }
@@ -196,7 +205,7 @@
             margin-bottom: 15px;
         }
         .color-picker-label {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             margin-bottom: 8px;
             color: #64748b;
@@ -208,8 +217,8 @@
         }
 
         .color-option {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             border: 3px solid #ffffff;
@@ -225,7 +234,7 @@
             box-shadow: 0 0 0 2px #000000;
         }
 
-        /* Styling for the Photo Card */
+        /* Photo Card Styling */
         .card-wrapper {
             display: flex;
             justify-content: center;
@@ -236,77 +245,90 @@
             width: 100%;
             max-width: 420px;
             background: #ffffff;
-            border: 3px solid var(--theme-border, #1a73e8);
-            border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            border: 4px solid var(--theme-border, #1a73e8);
+            border-radius: 20px;
+            padding: 25px 22px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
             text-align: center;
             position: relative;
         }
 
-        .card-header {
-            font-size: 22px;
-            font-weight: 800;
+        .card-header-badge {
+            display: inline-block;
+            background: var(--theme-bg-light, #eff6ff);
             color: var(--theme-color, #1a73e8);
-            text-transform: uppercase;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 4px 18px;
+            border-radius: 20px;
             letter-spacing: 0.5px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 12px;
             margin-bottom: 15px;
+            border: 1px solid var(--theme-border, #1a73e8);
         }
 
         .card-book-title {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             line-height: 1.3;
         }
 
         .score-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 15px;
+            background: var(--theme-bg-light, #eff6ff);
+            border: 1px solid var(--theme-border, #1a73e8);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 18px;
         }
 
         .card-score-label {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            color: #64748b;
-            margin-bottom: 4px;
+            color: #475569;
+            margin-bottom: 2px;
         }
 
         .card-score {
-            font-size: 38px;
+            font-size: 40px;
             font-weight: 800;
             color: var(--theme-color, #1a73e8);
+            line-height: 1.1;
         }
 
         .card-details {
             text-align: left;
-            background: #ffffff;
-            border: 1px solid #f1f5f9;
-            padding: 14px;
-            border-radius: 10px;
-            font-size: 14px;
-            margin-bottom: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 15px;
+            margin-bottom: 18px;
         }
 
         .card-details p {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #334155;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
         .card-details p:last-child {
             margin-bottom: 0;
         }
 
+        .card-details p span.val {
+            font-weight: 700;
+            color: var(--theme-color, #1a73e8);
+            background: #ffffff;
+            padding: 2px 10px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+        }
+
         .card-footer {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: #64748b;
             margin-top: 15px;
@@ -314,27 +336,27 @@
             padding-top: 12px;
         }
 
-        /* Caption Text Area */
+        /* Caption Text Box */
         .caption-section {
             background: #f8fafc;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 14px;
+            padding: 18px;
             margin-top: 20px;
         }
 
         .caption-box {
             width: 100%;
-            height: 170px;
+            height: 180px;
             padding: 12px;
             border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 14px;
             resize: none;
             background: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             white-space: pre-wrap;
-            line-height: 1.5;
+            line-height: 1.6;
             color: #334155;
         }
     </style>
@@ -353,7 +375,7 @@
                 <li>তিন গোয়েন্দা সিরিজের ১৬০টি বই থেকে একটি বই র‍্যান্ডমলি বেছে নেওয়া হবে।</li>
                 <li>বইটি পড়া হয়ে থাকলে রেটিং দিন, পড়া না থাকলে অন্য বই সিলেক্ট করুন।</li>
                 <li>৩টি সহজ প্রশ্নের জন্য ১ থেকে ৫ পর্যন্ত রেটিং সিলেক্ট করুন।</li>
-                <li>আপনার নাম লিখে ডাউনলোডযোগ্য সুন্দর রেটিং ফোটো কার্ড এবং কপি করার ক্যাপশন পান।</li>
+                <li>আপনার নাম লিখে সুন্দর ফটো কার্ড ডাউনলোড করুন এবং পোস্টের ক্যাপশন কপি করুন।</li>
             </ol>
         </div>
         <button class="btn" onclick="startProcess()">শুরু করুন</button>
@@ -363,7 +385,7 @@
     <div id="screen-selection" class="screen">
         <h2>বই নির্বাচন</h2>
         <div class="book-display">
-            <p>আপনার জন্য নির্বাচিত বই:</p>
+            <p style="font-size: 15px; color: #64748b;">আপনার জন্য নির্বাচিত বই:</p>
             <div id="displayed-book-title" class="book-title">...</div>
         </div>
         <button class="btn" onclick="goToRating()">আমি বইটি পড়েছি এবং রেটিং দিতে চাই</button>
@@ -373,7 +395,7 @@
     <!-- Step 3: Rating Form -->
     <div id="screen-rating" class="screen">
         <h2>রেটিং দিন</h2>
-        <p style="text-align: center; font-weight: bold; color: var(--theme-color); font-size: 18px; margin-bottom: 15px;" id="rating-book-name"></p>
+        <p style="text-align: center; font-weight: bold; color: var(--theme-color); font-size: 20px; margin-bottom: 18px;" id="rating-book-name"></p>
         
         <div class="question-group">
             <div class="question-title">১. বইটি কি তিন গোয়েন্দা সিরিজের সাথে মানানসই?</div>
@@ -423,32 +445,32 @@
         <div class="color-picker-wrapper">
             <div class="color-picker-label">কার্ডের কালার থিম বেছে নিন:</div>
             <div class="color-picker">
-                <div class="color-option selected" style="background: #1a73e8;" onclick="changeTheme('#1a73e8', this)"></div>
-                <div class="color-option" style="background: #dc2626;" onclick="changeTheme('#dc2626', this)"></div>
-                <div class="color-option" style="background: #16a34a;" onclick="changeTheme('#16a34a', this)"></div>
-                <div class="color-option" style="background: #1e293b;" onclick="changeTheme('#1e293b', this)"></div>
+                <div class="color-option selected" style="background: #1a73e8;" onclick="changeTheme('#1a73e8', '#eff6ff', this)"></div>
+                <div class="color-option" style="background: #dc2626;" onclick="changeTheme('#dc2626', '#fef2f2', this)"></div>
+                <div class="color-option" style="background: #16a34a;" onclick="changeTheme('#16a34a', '#f0fdf4', this)"></div>
+                <div class="color-option" style="background: #1e293b;" onclick="changeTheme('#1e293b', '#f8fafc', this)"></div>
             </div>
         </div>
 
         <div class="card-wrapper">
             <div id="photo-card" class="photo-card">
-                <div class="card-header">রেট দ্য বুক</div>
+                <div class="card-header-badge">রেট দ্য বুক</div>
                 <div class="card-book-title" id="card-book-name">বইয়ের নাম</div>
                 
                 <div class="score-box">
-                    <div class="card-score-label">ব্যক্তিগত রেটিং</div>
+                    <div class="card-score-label">ব্যক্তিগত গড় রেটিং</div>
                     <div class="card-score" id="card-avg-score">0.0 / 5</div>
                 </div>
 
                 <div class="card-details">
-                    <p><b>রিভিউ দাতার নাম:</b> <span id="card-reviewer-name"></span></p>
-                    <p><span>১. সিরিজের সাথে মানানসই:</span> <b><span id="card-q1-score"></span>/5</b></p>
-                    <p><span>২. রহস্য ও গোয়েন্দাগিরি:</span> <b><span id="card-q2-score"></span>/5</b></p>
-                    <p><span>৩. গল্প ও পড়ার অভিজ্ঞতা:</span> <b><span id="card-q3-score"></span>/5</b></p>
+                    <p><span>রিভিউ দাতার নাম:</span> <span class="val" id="card-reviewer-name">--</span></p>
+                    <p><span>১. সিরিজের সাথে মানানসই:</span> <span class="val" id="card-q1-score">0/5</span></p>
+                    <p><span>২. রহস্য ও গোয়েন্দাগিরি:</span> <span class="val" id="card-q2-score">0/5</span></p>
+                    <p><span>৩. গল্প ও পড়ার অভিজ্ঞতা:</span> <span class="val" id="card-q3-score">0/5</span></p>
                 </div>
 
                 <div class="card-footer">
-                    Soujanye: Tin Goyenda Fans Posting
+                    সৌজন্যে: তিন গোয়েন্দা ফ্যানস পোস্টিং
                 </div>
             </div>
         </div>
@@ -456,7 +478,7 @@
         <button class="btn btn-success" onclick="downloadCard()">ফটো কার্ড ডাউনলোড করুন</button>
 
         <div class="caption-section">
-            <p style="font-weight: 600; margin-bottom: 8px;">আপনার পোস্টের জন্য ক্যাপশনটি এখন থেকে সংগ্রহ করুন:</p>
+            <p style="font-weight: 600; margin-bottom: 8px; font-size: 15px;">আপনার পোস্টের জন্য ক্যাপশনটি এখান থেকে সংগ্রহ করুন:</p>
             <textarea id="caption-text" class="caption-box" readonly></textarea>
             <button class="btn btn-secondary" onclick="copyCaption()">ক্যাপশন কপি করুন</button>
         </div>
@@ -542,11 +564,11 @@
         document.getElementById('card-book-name').innerText = selectedBook;
         document.getElementById('card-reviewer-name').innerText = name;
         document.getElementById('card-avg-score').innerText = `${avgScore} / 5`;
-        document.getElementById('card-q1-score').innerText = ratings.q1;
-        document.getElementById('card-q2-score').innerText = ratings.q2;
-        document.getElementById('card-q3-score').innerText = ratings.q3;
+        document.getElementById('card-q1-score').innerText = `${ratings.q1}/5`;
+        document.getElementById('card-q2-score').innerText = `${ratings.q2}/5`;
+        document.getElementById('card-q3-score').innerText = `${ratings.q3}/5`;
 
-        // Structured Caption Format
+        // Caption Generation
         const caption = `#রেট_দ্যা_বুক\n\nবইয়ের নাম: ${selectedBook}\nরিভিউ দাতার নাম: ${name}\nব্যক্তিগত রেটিং: ${avgScore}/5\n\n১. সিরিজের সাথে মানানসই: ${ratings.q1}/5\n২. রহস্য ও গোয়েন্দাগিরি: ${ratings.q2}/5\n৩. গল্প ও পড়ার অভিজ্ঞতা: ${ratings.q3}/5\n\n<পরবর্তীতে আপনার নিজের অনুভূতি এখানে কিছু লাইনে লিখুন>`;
         
         document.getElementById('caption-text').value = caption;
@@ -554,12 +576,13 @@
         showScreen('screen-result');
     }
 
-    function changeTheme(color, el) {
+    function changeTheme(color, lightBg, el) {
         document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
         el.classList.add('selected');
         const card = document.getElementById('photo-card');
         card.style.setProperty('--theme-color', color);
         card.style.setProperty('--theme-border', color);
+        card.style.setProperty('--theme-bg-light', lightBg);
     }
 
     function copyCaption() {
@@ -586,4 +609,4 @@
 </script>
 
 </body>
-    </html>
+</html>
