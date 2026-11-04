@@ -7,16 +7,10 @@
     <!-- SolaimanLipi & Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=SolaimanLipi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SolaimanLipi&family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- html2canvas Library for HD Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        @font-face {
-            font-family: 'SolaimanLipi';
-            src: url('https://cdnjs.cloudflare.com/ajax/libs/bangla-fonts/1.0.0/SolaimanLipi/SolaimanLipi.ttf') format('truetype');
-            font-display: swap;
-        }
-
         :root {
             --primary-color: #e60000; /* Default Red Theme */
             --bg-body: #f4f6f9;
@@ -50,12 +44,14 @@
         header h1 {
             color: #d32f2f;
             font-size: 26px;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         header p {
             color: #666;
             font-size: 14px;
             margin-top: 3px;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .main-container {
@@ -87,6 +83,7 @@
             color: #111;
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 8px;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .form-group {
@@ -99,6 +96,7 @@
             font-weight: 600;
             font-size: 14px;
             color: #444;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         input[type="text"], textarea, select {
@@ -106,9 +104,10 @@
             padding: 10px 12px;
             border: 1px solid #cccccc;
             border-radius: 6px;
-            font-size: 15px;
+            font-size: 16px;
             background-color: #fafafa;
             transition: all 0.2s ease;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         input[type="text"]:focus, textarea:focus, select:focus {
@@ -134,6 +133,7 @@
             background: #fafafa;
             cursor: pointer;
             transition: 0.2s;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .file-upload-wrapper:hover {
@@ -168,7 +168,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
+            font-size: 14px;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .theme-btn.active {
@@ -204,7 +205,7 @@
 
         .card-container-wrapper {
             width: 100%;
-            max-width: 500px; /* Responsive Fit Screen limit */
+            max-width: 500px;
             display: flex;
             justify-content: center;
         }
@@ -212,7 +213,7 @@
         /* Main Photo Card Design */
         #newsCard {
             width: 100%;
-            aspect-ratio: 1 / 1.15; /* Professional portrait ratio */
+            aspect-ratio: 1 / 1.15;
             background-color: #ffffff;
             position: relative;
             display: flex;
@@ -252,6 +253,7 @@
             font-weight: bold;
             border-radius: 3px;
             z-index: 2;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         /* Middle Bar: Brand Logo */
@@ -267,17 +269,18 @@
         }
 
         .brand-title {
-            font-size: 28px; /* Bigger Title as requested */
+            font-size: 30px;
             font-weight: bold;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             line-height: 1;
             text-align: center;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
-        /* Bottom Text Area (Strictly White Background) */
+        /* Bottom Text Area (Strictly White Background & Centered Text) */
         .card-content-area {
             height: 38%;
-            background-color: #ffffff; /* Bright White */
+            background-color: #ffffff;
             color: var(--text-color);
             padding: 16px 20px 10px 20px;
             display: flex;
@@ -286,15 +289,18 @@
         }
 
         .news-text {
-            font-size: 19px;
-            line-height: 1.45;
+            font-size: 20px;
+            line-height: 1.5;
             font-weight: bold;
             color: #1a1a1a;
+            text-align: center; /* Center-aligned text */
+            font-family: 'SolaimanLipi', sans-serif;
             display: -webkit-box;
-            -webkit-line-clamp: 3; /* Limits to 2-3 lines */
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
+            margin: auto 0;
         }
 
         /* Card Footer */
@@ -316,8 +322,9 @@
         }
 
         .news-date {
-            font-size: 12px;
+            font-size: 13px;
             color: #777777;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         /* Download Button */
@@ -338,6 +345,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            font-family: 'SolaimanLipi', sans-serif;
         }
 
         .download-btn:hover {
@@ -368,7 +376,7 @@
             
             <div class="form-group">
                 <label for="newsInput">১. আপনার টেক্সটটি লিখুন (২-৩ লাইন)</label>
-                <textarea id="newsInput" placeholder="এখানে আপনার সংবাদের প্রধান শিরোনাম বা বিস্তারিত ৩ লাইনের মধ্যে লিখুন...">রাজধানীতে বৈরী আবহাওয়ার কারণে স্বাভাবিক জনজীবন ব্যাহত; আবহাওয়া অফিসের সতর্কবার্তা জারি।</textarea>
+                <textarea id="newsInput" placeholder="এখানে আপনার সংবাদের বিস্তারিত লিখুন..."></textarea>
             </div>
 
             <div class="form-group">
@@ -379,7 +387,7 @@
                 </div>
                 <!-- Image Adjust Controls -->
                 <div class="img-adjust-controls">
-                    <label style="margin:0; font-size:12px;">জুম:</label>
+                    <label style="margin:0; font-size:13px;">জুম:</label>
                     <input type="range" id="zoomRange" min="1" max="2" step="0.05" value="1">
                 </div>
             </div>
@@ -414,7 +422,7 @@
                     <!-- Top Image Section -->
                     <div class="card-image-area">
                         <span class="category-tag" id="cardCategory">জাতীয়</span>
-                        <img id="cardImage" src="https://via.placeholder.com/600x400/e0e0e0/888888?text=%E0%A6%9B%E0%A6%AC%E0%A6%BF+%E0%A6%86%E0%A6%AA%E0%A6%B2%E0%A7%8B%E0%A6%A1+%E0%A6%95%E0%A6%B0%E0%A7%81%E0%A6%A8" alt="News Image">
+                        <img id="cardImage" src="https://via.placeholder.com/600x400/e0e0e0/888888?text=%E0%A6%9B%E0%A6%BB%E0%A6%BF+%E0%A6%86%E0%A6%AA%E0%A6%B2%E0%A7%8B%E0%A6%A1+%E0%A6%95%E0%A6%B0%E0%A7%81%E0%A6%A8" alt="News Image">
                     </div>
 
                     <!-- Middle Branding Title -->
@@ -422,10 +430,10 @@
                         <div class="brand-title">ডয়েল নিউজ</div>
                     </div>
 
-                    <!-- Bottom Content Section (White Background) -->
+                    <!-- Bottom Content Section (White Background & Center Aligned) -->
                     <div class="card-content-area">
                         <div class="news-text" id="cardText">
-                            রাজধানীতে বৈরী আবহাওয়ার কারণে স্বাভাবিক জনজীবন ব্যাহত; আবহাওয়া অফিসের সতর্কবার্তা জারি।
+                            <!-- ফাঁকা রাখা হয়েছে, ব্যবহারকারী লিখলে দেখাবে -->
                         </div>
                         <div class="card-footer">
                             <span class="website-url">doyelnews.com</span>
@@ -452,7 +460,7 @@
 
         // Dynamic Text Inputs Update
         document.getElementById('newsInput').addEventListener('input', function() {
-            document.getElementById('cardText').innerText = this.value || 'আপনার সংবাদের বিস্তারিত বিবরণ এখানে দেখাবে।';
+            document.getElementById('cardText').innerText = this.value;
         });
 
         document.getElementById('categoryInput').addEventListener('input', function() {
@@ -521,4 +529,4 @@
         }
     </script>
 </body>
-                                                                                                                                                                                             </html>
+                        </html>
