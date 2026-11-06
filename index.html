@@ -16,21 +16,52 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
       background-color: #fdfdf9;
+      font-family: 'Hind Siliguri', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
+    /* Header Styles (Theme Matched) */
+    .navbar {
+      width: 100%;
+      background-color: #1b4d2e;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .brand-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f39c12;
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .brand-title:hover {
+      color: #e67e22;
+    }
+
+    /* Main Layout */
     .tg-container {
-      font-family: 'Hind Siliguri', sans-serif;
       width: 100%;
       max-width: 900px;
       margin: 0 auto;
       padding: 20px 10px;
       background-color: #fdfdf9;
       color: #1b3622;
-      box-sizing: border-box;
+      flex: 1;
     }
 
     .tg-card {
@@ -40,7 +71,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       border: 1px solid #e2e8f0;
       margin-bottom: 20px;
-      box-sizing: border-box;
       width: 100%;
     }
 
@@ -98,7 +128,6 @@
       font-size: 15px;
       border: 1.5px solid #cbd5e0;
       border-radius: 8px;
-      box-sizing: border-box;
       outline: none;
       font-family: 'Hind Siliguri', sans-serif;
     }
@@ -205,14 +234,13 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      box-sizing: border-box;
       overflow-x: auto;
     }
 
     /* Landscape Certificate Style Photo Card */
     #photo-card {
       width: 620px;
-      min-height: 330px;
+      min-height: 340px;
       background: #fffef9;
       border: 5px solid #1b4d2e;
       outline: 2px dashed #8fae92;
@@ -220,7 +248,6 @@
       border-radius: 4px;
       padding: 24px 30px;
       position: relative;
-      box-sizing: border-box;
       box-shadow: 0 10px 25px rgba(0,0,0,0.08);
       text-align: center;
       font-family: 'Hind Siliguri', sans-serif;
@@ -263,31 +290,25 @@
       font-size: 22px;
       color: #1b4d2e;
       font-weight: 700;
-      margin: 2px 0 10px 0;
-    }
-
-    .card-reader-title {
-      font-size: 13px;
-      color: #4a5568;
-      margin-bottom: 2px;
+      margin: 2px 0 12px 0;
     }
 
     .card-user-name {
-      font-size: 20px;
+      font-size: 22px;
       color: #1b4d2e;
-      font-weight: 600;
+      font-weight: 700;
       border-bottom: 1.5px dashed #a0aec0;
       padding-bottom: 2px;
       display: inline-block;
       max-width: 85%;
-      margin: 0 auto 12px auto;
+      margin: 0 auto 10px auto;
     }
 
     .card-stats-text {
       font-size: 15px;
       color: #2d3748;
       margin-bottom: 8px;
-      font-weight: 400;
+      font-weight: 500;
     }
 
     /* Scale / Progress Bar */
@@ -314,8 +335,15 @@
     .card-percent-label {
       font-size: 14px;
       color: #4a5568;
-      font-weight: 400;
+      font-weight: 500;
       margin-top: 4px;
+    }
+
+    .card-level-label {
+      font-size: 15px;
+      color: #1b4d2e;
+      font-weight: 700;
+      margin-top: 6px;
     }
 
     /* Footer Row (Date & Credit) */
@@ -347,9 +375,65 @@
     .download-btn:hover {
       background: #b45309;
     }
+
+    /* Footer Styles (Theme Matched) */
+    .footer {
+      width: 100%;
+      background-color: #1b4d2e;
+      color: #ecf0f1;
+      padding: 25px 15px;
+      text-align: center;
+      margin-top: auto;
+    }
+    .footer h4 {
+      color: #f39c12;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .footer p {
+      font-size: 14px;
+      color: #e2e8f0;
+      margin-bottom: 15px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .footer-links a {
+      color: #ffffff;
+      background-color: #2e7d32;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .footer-links a:hover {
+      background-color: #f39c12;
+      color: #1b4d2e;
+    }
+    .copyright {
+      font-size: 13px;
+      color: #cbd5e0;
+      border-top: 1px solid #2e7d32;
+      padding-top: 12px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
+
+<!-- সেন্টারড হেডার নেভিগেশন বার -->
+<nav class="navbar">
+  <a href="index.html" class="brand-title">তিন গোয়েন্দা</a>
+</nav>
 
 <div class="tg-container">
   <div class="tg-card">
@@ -363,7 +447,7 @@
         <li>প্রথমে আপনার নামটি লিখুন (নাম লেখা বাধ্যতামূলক)।</li>
         <li>নিচের তালিকা থেকে আপনার পড়া বইগুলোতে ক্লিক করুন।</li>
         <li>তালিকার নিচে আপনার মোট পড়া বই ও প্রোগ্রেস দেখতে পাবেন।</li>
-        <li>এরপর "আপনার ফটো কার্ডটি জেনারেট করুন" বাটনে ক্লিক করে ছবিটি ডাউনলোড করে নিন।</li>
+        <li>এরপর “আপনার ফটো কার্ডটি জেনারেট করুন” বাটনে ক্লিক করে ছবিটি ডাউনলোড করে নিন।</li>
       </ol>
     </div>
 
@@ -410,11 +494,10 @@
           </div>
 
           <div>
-            <div class="card-reader-title">পাঠক</div>
             <div class="card-user-name" id="cardTitleText">ফারহান মাহিন</div>
 
             <div class="card-stats-text">
-              মোট লিখেছেন/পড়েছেন: <span id="cardCountText">০</span> টি বই (১৬০ টির মধ্যে)
+              মোট বই পড়েছেন: <span id="cardCountText">০</span> টি (১৬০ টির মধ্যে)
             </div>
 
             <!-- Scale / Progress Bar -->
@@ -422,7 +505,8 @@
               <div class="card-scale-bg">
                 <div class="card-scale-fill" id="cardProgressFill" style="width: 0%;"></div>
               </div>
-              <div class="card-percent-label">বই পড়া হয়েছে: <span id="cardPercentText">০%</span></div>
+              <div class="card-percent-label">পড়া সম্পন্ন: <span id="cardPercentText">০%</span></div>
+              <div class="card-level-label">পাঠকের লেভেল: <span id="cardLevelText">নবীন পাঠক</span></div>
             </div>
           </div>
 
@@ -438,6 +522,19 @@
     <button class="download-btn" onclick="downloadPhotoCard()">📷 এইচডি ফটো কার্ড ডাউনলোড করুন</button>
   </div>
 </div>
+
+<!-- ফুটার সেকশন -->
+<footer class="footer">
+  <h4>তিন গোয়েন্দা সম্পর্কে আরও জানুন</h4>
+  <p>আমাদের সাথে যুক্ত হতে এবং নিয়মিত আপডেট পেতে নিচের গ্রুপগুলোতে জয়েন করুন:</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/groups/tigofansposting/" target="_blank">তিন গোয়েন্দা ফ্যানস পোস্টিং</a>
+    <a href="https://www.facebook.com/groups/tigomemeposting/" target="_blank">তিন গোয়েন্দা মিম পোস্টিং</a>
+  </div>
+  <div class="copyright">
+    &copy; ২০২৬ তিন গোয়েন্দা ফ্যানস পোস্টিং
+  </div>
+</footer>
 
 <script>
 const bookList = [
@@ -515,6 +612,17 @@ function getNumericBengaliDate() {
   return formattedStr.replace(/\d/g, d => ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'][d]);
 }
 
+function getReaderLevel(percentage) {
+  if (percentage <= 20) return "নবীন পাঠক";
+  if (percentage <= 35) return "কৌতূহলী গোয়েন্দা";
+  if (percentage <= 50) return "উদীয়মান সিআইডি";
+  if (percentage <= 65) return "পাকা ডিটেকটিভ";
+  if (percentage <= 80) return "অভিজ্ঞ ইনভেস্টিগেটর";
+  if (percentage <= 95) return "মাস্টার গোয়েন্দা";
+  if (percentage <= 100) return "তিগোপিডিয়া";
+  return "তিন গোয়েন্দা সম্রাট";
+}
+
 function generatePhotoCard() {
   const nameInput = document.getElementById('readerName').value.trim();
   
@@ -526,11 +634,13 @@ function generatePhotoCard() {
   
   const count = selectedBooks.size;
   const percentage = Math.round((count / bookList.length) * 100);
+  const readerLevel = getReaderLevel(percentage);
 
   document.getElementById('cardTitleText').innerText = nameInput;
   document.getElementById('cardCountText').innerText = toBengaliNumber(count);
   document.getElementById('cardProgressFill').style.width = `${percentage}%`;
   document.getElementById('cardPercentText').innerText = `${toBengaliNumber(percentage)}%`;
+  document.getElementById('cardLevelText').innerText = readerLevel;
   document.getElementById('cardDateText').innerText = getNumericBengaliDate();
 
   const outputSec = document.getElementById('card-output-section');
@@ -559,4 +669,4 @@ window.onload = renderBooks;
 </script>
 
 </body>
-		  </html>
+	</html>
