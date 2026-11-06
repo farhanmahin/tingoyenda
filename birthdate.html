@@ -34,4 +34,243 @@
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-            position: relative
+            position: relative;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .brand-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f39c12;
+            letter-spacing: 0.5px;
+        }
+
+        /* ড্রপডাউন সাইড মেনু Styling */
+        .sidebar-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #34495e;
+            width: 200px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        .sidebar-menu.active {
+            display: block;
+        }
+        .sidebar-menu a {
+            display: block;
+            color: #ffffff;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #3d566e;
+            transition: background 0.2s;
+        }
+        .sidebar-menu a:hover {
+            background-color: #1abc9c;
+        }
+
+        /* মূল কন্টেইনার */
+        .main-content {
+            padding: 30px 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            max-width: 480px;
+            width: 100%;
+            border-top: 5px solid #27ae60;
+        }
+
+        /* টাইটেল ও নিয়মাবলী */
+        .group-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .group-header h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        .group-header p {
+            color: #7f8c8d;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        .rules-box {
+            background-color: #fffde7;
+            border-left: 4px solid #fbc02d;
+            padding: 14px 16px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+        .rules-box h4 {
+            color: #f57f17;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .rules-box ol {
+            padding-left: 20px;
+            color: #424242;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ফর্ম উপাদানসমূহ */
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 15px;
+        }
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="date"]:focus {
+            border-color: #27ae60;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        .checkbox-group input {
+            margin-top: 4px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .checkbox-group label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #555;
+            cursor: pointer;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+    </style>
+</head>
+<body>
+
+<!-- টপ নেভিগেশন বার -->
+<nav class="navbar">
+    <div class="nav-left">
+        <button class="menu-btn" onclick="toggleMenu()" aria-label="মেনু">☰</button>
+        <span class="brand-title">তিন গোয়েন্দা</span>
+    </div>
+    
+    <!-- ড্রপডাউন মেনু (হোম বাটন) -->
+    <div class="sidebar-menu" id="sidebarMenu">
+        <a href="index.html">হোম</a>
+    </div>
+</nav>
+
+<div class="main-content">
+    <div class="container">
+        
+        <!-- শিরোনাম -->
+        <div class="group-header">
+            <h2>জন্মদিনের তথ্য ফর্ম</h2>
+            <p><strong>তিন গোয়েন্দা ফ্যান্স পোস্টিং</strong> গ্রুপে আপনার জন্মদিনে শুভেচ্ছা জানানোর জন্য ফর্মটি তৈরি করা হয়েছে।</p>
+        </div>
+
+        <!-- নিয়মাবলী নির্দেশিকা -->
+        <div class="rules-box">
+            <h4>📋 তথ্য পূরণের নিয়মাবলী:</h4>
+            <ol>
+                <li>প্রথমে নিচের নির্দিষ্ট ঘরে আপনার নাম লিখুন।</li>
+                <li>এরপর আপনার সঠিক জন্মতারিখটি যুক্ত করুন।</li>
+                <li>গ্রুপে পোস্ট করার সম্মতির ঘরটিতে টিক চিহ্ন দিন।</li>
+                <li>সব তথ্য ঠিক থাকলে নিচে 'সাবমিট করুন' বাটনে ক্লিক করুন।</li>
+            </ol>
+        </div>
+        
+        <!-- ফর্ম শুরু -->
+        <form action="https://api.web3forms.com/submit" method="POST">
+            
+            <!-- Web3Forms Access Key -->
+            <input type="hidden" name="access_key" value="86723e76-3db6-4ccd-9de1-0129267f725f">
+
+            <!-- ১. নাম -->
+            <div class="form-group">
+                <label for="name">আপনার নাম *</label>
+                <input type="text" id="name" name="নাম" placeholder="আপনার পূর্ণ নাম লিখুন" required>
+            </div>
+
+            <!-- ২. তারিখ -->
+            <div class="form-group">
+                <label for="dob">আপনার জন্মতারিখ *</label>
+                <input type="date" id="dob" name="জন্মতারিখ" required>
+            </div>
+
+            <!-- ৩. সম্মতি (টিক চিহ্ন) -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="consent" name="সম্মতি" value="হ্যাঁ, রাজি" required>
+                <label for="consent">আমি 'তিন গোয়েন্দা ফ্যান্স পোস্টিং' গ্রুপে আমার জন্মদিনে শুভেচ্ছা পোস্ট করার অনুমতি দিচ্ছি। *</label>
+            </div>
+
+            <button type="submit">সাবমিট করুন</button>
+        </form>
+    </div>
+</div>
+
+<!-- ড্রপডাউন মেনু চালু ও বন্ধ করার স্ক্রিপ্ট -->
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById("sidebarMenu");
+        menu.classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>
