@@ -30,7 +30,7 @@
       min-height: 100vh;
     }
 
-    /* Header Styles (White Title) */
+    /* Header Styles (Theme Matched) */
     .navbar {
       width: 100%;
       background-color: #1b4d2e;
@@ -235,19 +235,18 @@
       display: flex;
       justify-content: center;
       overflow-x: auto;
-      margin-bottom: 25px;
     }
 
     /* Landscape Certificate Style Photo Card */
-    .photo-card {
+    #photo-card {
       width: 620px;
-      min-height: 350px;
+      min-height: 360px;
       background: #fffef9;
       border: 5px solid #1b4d2e;
       outline: 2px dashed #8fae92;
       outline-offset: -10px;
       border-radius: 4px;
-      padding: 22px 28px;
+      padding: 26px 30px;
       position: relative;
       box-shadow: 0 10px 25px rgba(0,0,0,0.08);
       text-align: center;
@@ -288,40 +287,42 @@
     }
 
     .card-main-heading {
-      font-size: 21px;
+      font-size: 22px;
       color: #1b4d2e;
       font-weight: 700;
-      margin: 2px 0 8px 0;
+      margin: 2px 0 14px 0;
     }
 
     .card-user-name {
-      font-size: 20px;
+      font-size: 22px;
       color: #1b4d2e;
       font-weight: 700;
       border-bottom: 1.5px dashed #a0aec0;
-      padding-bottom: 2px;
+      padding-bottom: 4px;
       display: inline-block;
       max-width: 85%;
-      margin: 0 auto 8px auto;
+      margin: 0 auto 14px auto;
     }
 
     .card-stats-text {
-      font-size: 14px;
+      font-size: 15px;
       color: #2d3748;
-      margin-bottom: 8px;
+      margin-top: 4px;
+      margin-bottom: 12px;
       font-weight: 500;
+      line-height: 1.5;
     }
 
     /* Scale / Progress Bar */
     .card-scale-container {
       width: 80%;
-      margin: 0 auto 6px auto;
+      margin: 8px auto 8px auto;
     }
 
     .card-scale-bg {
       background: #e2e8f0;
-      height: 10px;
-      border-radius: 5px;
+      height: 12px;
+      border-radius: 6px;
       overflow: hidden;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
     }
@@ -329,37 +330,22 @@
     .card-scale-fill {
       background: linear-gradient(90deg, #2e7d32, #1b4d2e);
       height: 100%;
-      border-radius: 5px;
+      border-radius: 6px;
       transition: width 0.4s ease;
     }
 
     .card-percent-label {
-      font-size: 13px;
+      font-size: 14px;
       color: #4a5568;
       font-weight: 500;
-      margin-top: 3px;
+      margin-top: 6px;
     }
 
     .card-level-label {
-      font-size: 14px;
+      font-size: 15px;
       color: #1b4d2e;
       font-weight: 700;
-      margin-top: 4px;
-    }
-
-    /* Book items inline list style with bullets */
-    .card-books-list {
-      font-size: 13px;
-      color: #2d3748;
-      background: #f4f8f5;
-      padding: 8px 12px;
-      border-radius: 6px;
-      max-height: 90px;
-      overflow-y: auto;
-      text-align: justify;
-      line-height: 1.6;
-      margin: 8px 0;
-      border: 1px solid #d8e6dc;
+      margin-top: 8px;
     }
 
     /* Footer Row (Date & Credit) */
@@ -368,9 +354,9 @@
       justify-content: space-between;
       align-items: center;
       border-top: 1px solid #e2e8f0;
-      padding-top: 8px;
-      margin-top: 8px;
-      font-size: 11px;
+      padding-top: 12px;
+      margin-top: 18px;
+      font-size: 12px;
       color: #4a5568;
     }
 
@@ -378,12 +364,12 @@
       background: #d97706;
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 15px;
+      padding: 12px 24px;
+      font-size: 16px;
       font-weight: 600;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 20px;
       font-family: 'Hind Siliguri', sans-serif;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       transition: background 0.2s;
@@ -463,7 +449,7 @@
         <li>প্রথমে আপনার নামটি লিখুন (নাম লেখা বাধ্যতামূলক)।</li>
         <li>নিচের তালিকা থেকে আপনার পড়া বইগুলোতে ক্লিক করুন।</li>
         <li>তালিকার নিচে আপনার মোট পড়া বই ও প্রোগ্রেস দেখতে পাবেন।</li>
-        <li>এরপর "আপনার ফটো কার্ডটি জেনারেট করুন" বাটনে ক্লিক করে ছবিগুলো ডাউনলোড করে নিন।</li>
+        <li>এরপর "আপনার ফটো কার্ডটি জেনারেট করুন" বাটনে ক্লিক করে ছবিটি ডাউনলোড করে নিন।</li>
       </ol>
     </div>
 
@@ -488,16 +474,17 @@
     </div>
 
     <!-- Generate Button -->
-    <button class="tg-generate-btn" onclick="generatePhotoCards()">আপনার ফটো কার্ডগুলো জেনারেট করুন</button>
+    <button class="tg-generate-btn" onclick="generatePhotoCard()">আপনার ফটো কার্ডটি জেনারেট করুন</button>
   </div>
 
   <!-- Output Section -->
   <div id="card-output-section">
-    <div class="tg-section-heading" style="text-align:center; margin-bottom:12px;">আপনার ফটো কার্ডগুলো প্রস্তুত!</div>
+    <div class="tg-section-heading" style="text-align:center; margin-bottom:12px;">আপনার ফটো কার্ড প্রস্তুত!</div>
 
-    <!-- 1st Photo Card: Read Books -->
+    <!-- Certificate Style Photo Card Wrapper -->
     <div class="photo-card-wrapper">
-      <div class="photo-card" id="photo-card-read">
+      <div id="photo-card">
+        <!-- Watermark -->
         <svg class="card-watermark" viewBox="0 0 24 24" fill="#1b4d2e">
           <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
         </svg>
@@ -505,59 +492,36 @@
         <div class="card-content">
           <div>
             <div class="card-header-sub">Tin Goyenda Reading Tracker</div>
-            <div class="card-main-heading">পড়া বইয়ের তালিকা</div>
+            <div class="card-main-heading">তিন গোয়েন্দা পড়ার তালিকা</div>
           </div>
 
           <div>
-            <div class="card-user-name" id="cardTitleTextRead">ফারহান মাহিন</div>
-            <div class="card-stats-text">মোট বই পড়েছেন: <span id="cardCountText">০</span> টি (পড়া সম্পন্ন: <span id="cardPercentText">০%</span>)</div>
-            
-            <!-- Read Books List with Bullet Separator -->
-            <div class="card-books-list" id="readBooksListText">কোনো বই সিলেক্ট করা হয়নি</div>
+            <div class="card-user-name" id="cardTitleText">ফারহান মাহিন</div>
 
-            <div class="card-level-label">পাঠকের লেভেল: <span id="cardLevelText">নবীন পাঠক</span></div>
+            <div class="card-stats-text">
+              মোট বই পড়েছেন: <span id="cardCountText">০</span> টি (১৬০ টির মধ্যে)
+            </div>
+
+            <!-- Scale / Progress Bar -->
+            <div class="card-scale-container">
+              <div class="card-scale-bg">
+                <div class="card-scale-fill" id="cardProgressFill" style="width: 0%;"></div>
+              </div>
+              <div class="card-percent-label">পড়া সম্পন্ন: <span id="cardPercentText">০%</span></div>
+              <div class="card-level-label">পাঠকের লেভেল: <span id="cardLevelText">নবীন পাঠক</span></div>
+            </div>
           </div>
 
+          <!-- Bottom Footer Row -->
           <div class="card-footer">
-            <div>তারিখ: <span id="cardDateText1">০৩/১১/২০২৬</span></div>
+            <div>তারিখ: <span id="cardDateText">০৩/১১/২০২৬</span></div>
             <div>সৌজন্যে: তিন গোয়েন্দা ফ্যানস্ পোস্টিং</div>
           </div>
         </div>
       </div>
     </div>
-    <button class="download-btn" onclick="downloadCard('photo-card-read', 'tin-goyenda-read-books.png')">📷 পড়া বইয়ের কার্ড ডাউনলোড করুন</button>
 
-    <!-- 2nd Photo Card: Unread Books -->
-    <div class="photo-card-wrapper" style="margin-top: 30px;">
-      <div class="photo-card" id="photo-card-unread">
-        <svg class="card-watermark" viewBox="0 0 24 24" fill="#1b4d2e">
-          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-        </svg>
-
-        <div class="card-content">
-          <div>
-            <div class="card-header-sub">Tin Goyenda Reading Tracker</div>
-            <div class="card-main-heading">বাকি থাকা বইয়ের তালিকা</div>
-          </div>
-
-          <div>
-            <div class="card-user-name" id="cardTitleTextUnread">ফারহান মাহিন</div>
-            <div class="card-stats-text">পড়া বাকি আছে: <span id="cardUnreadCountText">১৬০</span> টি বই</div>
-            
-            <!-- Unread Books List with Bullet Separator -->
-            <div class="card-books-list" id="unreadBooksListText">সবগুলো বই পড়া বাকি</div>
-
-            <div class="card-level-label" style="color: #718096;">পরবর্তী লক্ষ্য: সম্পূর্ণ সিরিজ শেষ করা</div>
-          </div>
-
-          <div class="card-footer">
-            <div>তারিখ: <span id="cardDateText2">০৩/১১/২০২৬</span></div>
-            <div>সৌজন্যে: তিন গোয়েন্দা ফ্যানস্ পোস্টিং</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="download-btn" onclick="downloadCard('photo-card-unread', 'tin-goyenda-unread-books.png')">📷 বাকি থাকা বইয়ের কার্ড ডাউনলোড করুন</button>
+    <button class="download-btn" onclick="downloadPhotoCard()">📷 এইচডি ফটো কার্ড ডাউনলোড করুন</button>
   </div>
 </div>
 
@@ -661,7 +625,7 @@ function getReaderLevel(percentage) {
   return "তিন গোয়েন্দা সম্রাট";
 }
 
-function generatePhotoCards() {
+function generatePhotoCard() {
   const nameInput = document.getElementById('readerName').value.trim();
   
   if (nameInput === "") {
@@ -673,33 +637,13 @@ function generatePhotoCards() {
   const count = selectedBooks.size;
   const percentage = Math.round((count / bookList.length) * 100);
   const readerLevel = getReaderLevel(percentage);
-  const currentDate = getNumericBengaliDate();
 
-  // Gather read and unread book names
-  const readNames = [];
-  const unreadNames = [];
-
-  bookList.forEach((book, index) => {
-    if (selectedBooks.has(index)) {
-      readNames.push(book);
-    } else {
-      unreadNames.push(book);
-    }
-  });
-
-  // Populate Read Card
-  document.getElementById('cardTitleTextRead').innerText = nameInput;
+  document.getElementById('cardTitleText').innerText = nameInput;
   document.getElementById('cardCountText').innerText = toBengaliNumber(count);
+  document.getElementById('cardProgressFill').style.width = `${percentage}%`;
   document.getElementById('cardPercentText').innerText = `${toBengaliNumber(percentage)}%`;
   document.getElementById('cardLevelText').innerText = readerLevel;
-  document.getElementById('readBooksListText').innerText = readNames.length > 0 ? readNames.join(" • ") : "কোনো বই সিলেক্ট করা হয়নি";
-  document.getElementById('cardDateText1').innerText = currentDate;
-
-  // Populate Unread Card
-  document.getElementById('cardTitleTextUnread').innerText = nameInput;
-  document.getElementById('cardUnreadCountText').innerText = toBengaliNumber(unreadNames.length);
-  document.getElementById('unreadBooksListText').innerText = unreadNames.length > 0 ? unreadNames.join(" • ") : "সবগুলো বই পড়া শেষ!";
-  document.getElementById('cardDateText2').innerText = currentDate;
+  document.getElementById('cardDateText').innerText = getNumericBengaliDate();
 
   const outputSec = document.getElementById('card-output-section');
   outputSec.style.display = 'block';
@@ -707,8 +651,8 @@ function generatePhotoCards() {
 }
 
 /* High-Quality Photo Download Function */
-function downloadCard(elementId, filename) {
-  const cardElement = document.getElementById(elementId);
+function downloadPhotoCard() {
+  const cardElement = document.getElementById('photo-card');
 
   html2canvas(cardElement, {
     scale: 4,
@@ -717,7 +661,7 @@ function downloadCard(elementId, filename) {
     logging: false
   }).then(canvas => {
     const link = document.createElement('a');
-    link.download = filename;
+    link.download = 'tin-goyenda-photo-card.png';
     link.href = canvas.toDataURL('image/png', 1.0);
     link.click();
   });
