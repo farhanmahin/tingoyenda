@@ -499,7 +499,7 @@
             <div class="card-user-name" id="cardTitleText">ফারহান মাহিন</div>
 
             <div class="card-stats-text">
-              মোট বই পড়েছেন: <span id="cardCountText">০</span> টি (১৬০ টির মধ্যে)
+              মোট বই পড়েছেন: <span id="cardCountText">0</span> টি (160 টির মধ্যে)
             </div>
 
             <!-- Scale / Progress Bar -->
@@ -507,14 +507,14 @@
               <div class="card-scale-bg">
                 <div class="card-scale-fill" id="cardProgressFill" style="width: 0%;"></div>
               </div>
-              <div class="card-percent-label">পড়া সম্পন্ন: <span id="cardPercentText">০%</span></div>
+              <div class="card-percent-label">পড়া সম্পন্ন: <span id="cardPercentText">0%</span></div>
               <div class="card-level-label">পাঠকের লেভেল: <span id="cardLevelText">নবীন পাঠক</span></div>
             </div>
           </div>
 
           <!-- Bottom Footer Row -->
           <div class="card-footer">
-            <div>তারিখ: <span id="cardDateText">০৩/১১/২০২৬</span></div>
+            <div>তারিখ: <span id="cardDateText">03/11/2026</span></div>
             <div>সৌজন্যে: তিন গোয়েন্দা ফ্যানস্ পোস্টিং</div>
           </div>
         </div>
@@ -534,7 +534,7 @@
     <a href="https://www.facebook.com/groups/tigomemeposting/" target="_blank">তিন গোয়েন্দা মিম পোস্টিং</a>
   </div>
   <div class="copyright">
-    &copy; ২০২৬ তিন গোয়েন্দা ফ্যানস পোস্টিং
+    &copy; 2026 তিন গোয়েন্দা ফ্যানস পোস্টিং
   </div>
 </footer>
 
@@ -599,19 +599,13 @@ function updateProgress() {
   document.getElementById('progressBar').style.width = percentage + '%';
 }
 
-function toBengaliNumber(n) {
-  const bnNums = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-  return n.toString().replace(/\d/g, d => bnNums[d]);
-}
-
-function getNumericBengaliDate() {
+// সংখ্যাকে আর বাংলায় কনভার্ট না করে ডাইরেক্ট ইংরেজি সংখ্যা দেখানোর ফাংশন
+function getEnglishDate() {
   const now = new Date();
   const day = String(now.getDate()).padStart(2, '0');
   const month = String(now.getMonth() + 1).padStart(2, '0');
   const year = now.getFullYear();
-  
-  const formattedStr = `${day}/${month}/${year}`;
-  return formattedStr.replace(/\d/g, d => ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'][d]);
+  return `${day}/${month}/${year}`;
 }
 
 function getReaderLevel(percentage) {
@@ -639,11 +633,11 @@ function generatePhotoCard() {
   const readerLevel = getReaderLevel(percentage);
 
   document.getElementById('cardTitleText').innerText = nameInput;
-  document.getElementById('cardCountText').innerText = toBengaliNumber(count);
+  document.getElementById('cardCountText').innerText = count;
   document.getElementById('cardProgressFill').style.width = `${percentage}%`;
-  document.getElementById('cardPercentText').innerText = `${toBengaliNumber(percentage)}%`;
+  document.getElementById('cardPercentText').innerText = `${percentage}%`;
   document.getElementById('cardLevelText').innerText = readerLevel;
-  document.getElementById('cardDateText').innerText = getNumericBengaliDate();
+  document.getElementById('cardDateText').innerText = getEnglishDate();
 
   const outputSec = document.getElementById('card-output-section');
   outputSec.style.display = 'block';
