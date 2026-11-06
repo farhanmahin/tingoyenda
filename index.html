@@ -121,10 +121,14 @@
             margin-bottom: 35px;
         }
 
+        .features-group {
+            margin-bottom: 30px;
+        }
+
         .features-title {
             font-size: 20px;
             color: #1b4332;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 700;
         }
 
@@ -132,7 +136,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
-            margin-bottom: 30px;
         }
 
         .feature-btn {
@@ -169,9 +172,26 @@
             font-size: 15px;
             color: #6c584c;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            margin-bottom: 15px;
         }
 
         .notice-box p {
+            margin: 3px 0;
+        }
+
+        /* লাল কাস্টম নোটিশ বক্স (কপিরাইট/স্বত্বাধিকার সম্পর্কিত) */
+        .notice-box-red {
+            background-color: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 15px 20px;
+            border-radius: 0 6px 6px 0;
+            text-align: center;
+            font-size: 15px;
+            color: #9b2c2c;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .notice-box-red p {
             margin: 3px 0;
         }
 
@@ -253,20 +273,48 @@
 
         <!-- বৈশিষ্ট্য ও সাম্প্রতিক ফিচারসমূহের বাটন সেকশন -->
         <section class="features-section">
-            <h3 class="features-title">আমাদের বৈশিষ্ট্য ও ফিচারসমূহ</h3>
             
-            <div class="button-grid">
-                <a href="info.html" class="feature-btn">তিন গোয়েন্দার পরিচয়</a>
-                <a href="list.xml" class="feature-btn">তিন গোয়েন্দা বইয়ের তালিকা</a>
-                <a href="BookTracker.html" class="feature-btn">তিন গোয়েন্দা বুক ট্র্যাকার</a>
-                <a href="card.html" class="feature-btn">তিন গোয়েন্দা কার্ড জেনারেটর</a>
-                <a href="rate.html" class="feature-btn">তিন গোয়েন্দা রেটিং দিন</a>
+            <!-- আর্টিকেল সেকশন -->
+            <div class="features-group">
+                <h3 class="features-title">আর্টিকেল</h3>
+                <div class="button-grid">
+                    <a href="info.html" class="feature-btn">তিন গোয়েন্দার পরিচয়</a>
+                    <a href="list.xml" class="feature-btn">তিন গোয়েন্দা বইয়ের তালিকা</a>
+                </div>
+            </div>
+
+            <!-- ফিচারস সেকশন -->
+            <div class="features-group">
+                <h3 class="features-title">ফিচারস</h3>
+                <div class="button-grid">
+                    <a href="BookTracker.html" class="feature-btn">তিন গোয়েন্দা বুক ট্র্যাকার</a>
+                    <a href="card.html" class="feature-btn">তিন গোয়েন্দা কার্ড জেনারেটর</a>
+                    <a href="rate.html" class="feature-btn">তিন গোয়েন্দা রেটিং দিন</a>
+                </div>
+            </div>
+
+            <!-- কুইজ সেকশন -->
+            <div class="features-group">
+                <h3 class="features-title">কুইজ</h3>
+                <div class="button-grid">
+                    <a href="demoquiz.html" class="feature-btn">কুইজ (পর্ব ১)</a>
+                    <a href="demoquiz.html" class="feature-btn">কুইজ (পর্ব ২)</a>
+                    <a href="demoquiz.html" class="feature-btn">কুইজ (পর্ব ৩)</a>
+                    <a href="demoquiz.html" class="feature-btn">কুইজ (পর্ব ৪)</a>
+                    <a href="demoquiz.html" class="feature-btn">কুইজ (পর্ব ৫)</a>
+                </div>
             </div>
 
             <!-- নোটিশ বক্স -->
             <div class="notice-box">
                 <p><strong>বিজ্ঞপ্তি:</strong> ওয়েবসাইটটি নির্মাণের কাজ চলমান।</p>
                 <p>সামনে আরও অনেক ফিচার যুক্ত হবে। আমাদের সাথেই থাকুন!</p>
+            </div>
+
+            <!-- লাল কালারের নোটিশ বক্স (কপিরাইট নোটিশ) -->
+            <div class="notice-box-red">
+                <p><strong>বিশেষ সতর্কবার্তা:</strong> 'তিন গোয়েন্দা' সিরিজের যাবতীয় স্বত্বাধিকার সেবা প্রকাশনীর কাছে সংরক্ষিত।</p>
+                <p>এই ওয়েবসাইটটি পুরোপুরি একটি অলাভজনক ফ্যান ওয়েবসাইট এবং ভক্তদের সুবিধার জন্য তৈরি।</p>
             </div>
         </section>
 
@@ -286,4 +334,4 @@
     </footer>
 
 </body>
-</html>
+    </html>
