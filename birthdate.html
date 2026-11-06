@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জন্মদিন তথ্য সংগ্রহ</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .checkbox-group input {
+            margin-top: 4px;
+        }
+        .checkbox-group label {
+            font-size: 14px;
+            font-weight: normal;
+            color: #555;
+            cursor: pointer;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>জন্মদিনের তথ্য পূরণ করুন</h2>
+    
+    <!-- Web3Forms সার্ভিস ব্যবহার করে ফ্রিতে ডেটা ইমেইলে আনা যাবে -->
+    <form action="https://api.web3forms.com/submit" method="POST">
+        
+        <!-- আপনার Web3Forms Access Key এখানে বসাবেন -->
+        <input type="hidden" name="access_key" value="86723e76-3db6-4ccd-9de1-0129267f725f">
+
+        <!-- ১. নাম -->
+        <div class="form-group">
+            <label for="name">আপনার নাম *</label>
+            <input type="text" id="name" name="নাম" placeholder="আপনার পূর্ণ নাম লিখুন" required>
+        </div>
+
+        <!-- ২. তারিখ -->
+        <div class="form-group">
+            <label for="dob">আপনার জন্মতারিখ *</label>
+            <input type="date" id="dob" name="জন্মতারিখ" required>
+        </div>
+
+        <!-- ৩. সম্মতি (টিক চিহ্ন) -->
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="consent" name="সম্মতি" value="হ্যাঁ, রাজি" required>
+            <label for="consent">আমি এই গ্রুপে আমার জন্মদিন পোস্ট ও প্রকাশ করার অনুমতি দিচ্ছি। *</label>
+        </div>
+
+        <button type="submit">সাবমিট করুন</button>
+    </form>
+</div>
+
+</body>
+  </html>
