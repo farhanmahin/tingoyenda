@@ -111,17 +111,18 @@
             font-size: 15px;
         }
         input[type="text"],
-        input[type="date"] {
+        select {
             width: 100%;
             padding: 10px 12px;
             border: 1px solid #bdc3c7;
             border-radius: 6px;
             font-size: 15px;
             outline: none;
+            background-color: #fff;
             transition: border-color 0.3s;
         }
         input[type="text"]:focus,
-        input[type="date"]:focus {
+        select:focus {
             border-color: #27ae60;
         }
         .checkbox-group {
@@ -219,6 +220,7 @@
             flex-direction: column;
             gap: 10px;
             align-items: center;
+            margin-bottom: 18px;
         }
         .footer-links a {
             color: #ffffff;
@@ -233,6 +235,13 @@
         }
         .footer-links a:hover {
             background-color: #1abc9c;
+        }
+        .copyright {
+            font-size: 13px;
+            color: #95a5a6;
+            border-top: 1px solid #3d566e;
+            padding-top: 12px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -257,7 +266,7 @@
             <h4>📋 তথ্য পূরণের নিয়মাবলী:</h4>
             <ol>
                 <li>প্রথমে নিচের নির্দিষ্ট ঘরে আপনার নাম লিখুন।</li>
-                <li>এরপর আপনার সঠিক জন্মতারিখটি যুক্ত করুন।</li>
+                <li>এরপর আপনার জন্মতারিখ (দিন) ও জন্মমাস সিলেক্ট করুন।</li>
                 <li>গ্রুপে পোস্ট করার সম্মতির ঘরটিতে টিক চিহ্ন দিন।</li>
                 <li>সব তথ্য ঠিক থাকলে নিচে 'সাবমিট করুন' বাটনে ক্লিক করুন।</li>
             </ol>
@@ -275,13 +284,66 @@
                 <input type="text" id="name" name="নাম" placeholder="আপনার পূর্ণ নাম লিখুন" required>
             </div>
 
-            <!-- ২. তারিখ -->
+            <!-- ২. জন্ম তারিখ (দিন) ড্রপডাউন -->
             <div class="form-group">
-                <label for="dob">আপনার জন্মতারিখ *</label>
-                <input type="date" id="dob" name="জন্মতারিখ" required>
+                <label for="birthDate">জন্ম তারিখ *</label>
+                <select id="birthDate" name="জন্ম_তারিখ" required>
+                    <option value="" disabled selected>দিন সিলেক্ট করুন</option>
+                    <option value="১">১</option>
+                    <option value="২">২</option>
+                    <option value="৩">৩</option>
+                    <option value="৪">৪</option>
+                    <option value="৫">৫</option>
+                    <option value="৬">৬</option>
+                    <option value="৭">৭</option>
+                    <option value="৮">৮</option>
+                    <option value="৯">৯</option>
+                    <option value="১০">১০</option>
+                    <option value="১১">১১</option>
+                    <option value="১২">১২</option>
+                    <option value="১৩">১৩</option>
+                    <option value="১৪">১৪</option>
+                    <option value="১৫">১৫</option>
+                    <option value="১৬">১৬</option>
+                    <option value="১৭">১৭</option>
+                    <option value="১৮">১৮</option>
+                    <option value="১৯">১৯</option>
+                    <option value="২০">২০</option>
+                    <option value="২১">২১</option>
+                    <option value="২২">২২</option>
+                    <option value="২৩">২৩</option>
+                    <option value="২৪">২৪</option>
+                    <option value="২৫">২৫</option>
+                    <option value="২৬">২৬</option>
+                    <option value="২৭">২৭</option>
+                    <option value="২৮">২৮</option>
+                    <option value="২৯">২৯</option>
+                    <option value="৩০">৩০</option>
+                    <option value="৩১">৩১</option>
+                </select>
             </div>
 
-            <!-- ৩. সম্মতি (টিক চিহ্ন) -->
+            <!-- ৩. জন্ম মাস ড্রপডাউন -->
+            <div class="form-group">
+                <label for="birthMonth">জন্ম মাস *</label>
+                <select id="birthMonth" name="জন্ম_মাস" required>
+                    <option value="" disabled selected>মাস সিলেক্ট করুন</option>
+                    <option value="জানুয়ারি">জানুয়ারি</option>
+                    <option value="ফেব্রুয়ারি">ফেব্রুয়ারি</option>
+                    <option value="মার্চ">মার্চ</option>
+                    <option value="এপ্রিল">এপ্রিল</option>
+                    <option value="মে">মে</option>
+                    <option value="জুন">জুন</option>
+                    <option value="জুলাই">জুলাই</option>
+                    <option value="আগস্ট">আগস্ট</option>
+                    <option value="সেপ্টেম্বর">সেপ্টেম্বর</option>
+                    <option value="অক্টোবর">অক্টোবর</option>
+                    <option value="নভেম্বর">নভেম্বর</option>
+                    <option value="ডিসেম্বর">ডিসেম্বর</option>
+                </select>
+            </div>
+
+            <!-- ৪. সম্মতি (টিক চিহ্ন) -->
             <div class="form-group checkbox-group">
                 <input type="checkbox" id="consent" name="সম্মতি" value="হ্যাঁ, রাজি" required>
                 <label for="consent">আমি 'তিন গোয়েন্দা ফ্যানস পোস্টিং' গ্রুপে আমার জন্মদিনে শুভেচ্ছা পোস্ট করার অনুমতি দিচ্ছি। *</label>
@@ -307,6 +369,9 @@
     <div class="footer-links">
         <a href="https://www.facebook.com/groups/tigofansposting/" target="_blank">তিন গোয়েন্দা ফ্যানস পোস্টিং</a>
         <a href="https://www.facebook.com/groups/tigomemeposting/" target="_blank">তিন গোয়েন্দা মিম পোস্টিং</a>
+    </div>
+    <div class="copyright">
+        &copy; ২০২৬ তিন গোয়েন্দা ফ্যানস পোস্টিং। সর্বস্বত্ব সংরক্ষিত।
     </div>
 </footer>
 
@@ -354,4 +419,4 @@
 </script>
 
 </body>
-                    </html>
+    </html>
