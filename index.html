@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>তিন গোয়েন্দা - হোম পেজ</title>
+    <style>
+        /* গ্লোবাল রিসেট এবং বেসিক স্টাইল */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'SolaimanLipi', 'Hind Siliguri', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        /* সেন্টারড হেডার নেভিগেশন বার */
+        .navbar {
+            width: 100%;
+            background-color: #2c3e50;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        .brand-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+        .brand-title:hover {
+            color: #ecf0f1;
+        }
+
+        /* মূল কনটেন্ট কন্টেইনার */
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 30px 20px 50px 20px;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* পরিচয় সেকশন */
+        .intro-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dots {
+            font-size: 28px;
+            letter-spacing: 8px;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .intro-title {
+            font-size: 20px;
+            color: #34495e;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .intro-text {
+            font-size: 16px;
+            color: #333333;
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #eaedd0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .intro-text p {
+            margin-bottom: 12px;
+        }
+
+        .intro-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-name {
+            font-weight: bold;
+            color: #16a085;
+            font-size: 1.05em;
+        }
+
+        /* ডিভাইডার */
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 35px 0;
+        }
+
+        /* ফিচার ও নভিগেশন সেকশন */
+        .features-section {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .features-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .feature-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f5f9;
+            color: #2c3e50;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .feature-btn:hover {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            border-color: #94a3b8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+        }
+
+        /* নোটিশ বক্স */
+        .notice-box {
+            background-color: #fcf8e3;
+            border-left: 4px solid #f39c12;
+            padding: 15px 20px;
+            border-radius: 0 6px 6px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #8a6d3b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .notice-box p {
+            margin: 3px 0;
+        }
+
+        /* ফুটার সেকশন */
+        .footer {
+            width: 100%;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 25px 15px;
+            text-align: center;
+            margin-top: auto;
+        }
+        .footer h4 {
+            color: #f39c12;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+        .footer p {
+            font-size: 14px;
+            color: #bdc3c7;
+            margin-bottom: 15px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .footer-links a {
+            color: #ffffff;
+            background-color: #34495e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+        .footer-links a:hover {
+            background-color: #1abc9c;
+        }
+        .copyright {
+            font-size: 13px;
+            color: #95a5a6;
+            border-top: 1px solid #3d566e;
+            padding-top: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- সেন্টারড হেডার নেভিগেশন বার -->
+    <nav class="navbar">
+        <a href="index.html" class="brand-title">তিন গোয়েন্দা</a>
+    </nav>
+
+    <!-- মূল কনটেন্ট -->
+    <main class="container">
+        
+        <!-- পরিচয় সেকশন -->
+        <section class="intro-section">
+            <span class="dots">• • •</span>
+            <h2 class="intro-title">তিন গোয়েন্দার পরিচয়</h2>
+            <div class="intro-text">
+                <p>হ্যাল্লো কিশোর বন্ধুরা—</p>
+                <p>আমি কিশোর পাশা বলছি অ্যামিরিকার রকি বীচ থেকে। জায়গাটা লস অ্যাঞ্জেলসে, প্রশান্ত মহাসাগরের তীরে। হলিউড থেকে মাত্র কয়েক মাইল দূরে। যারা এখনও আমাদের পরিচয় জানো না, তাদের বলছি আমরা তিন বন্ধু একটা গোয়েন্দা সংস্থা খুলেছি। নাম <span class="highlight-name">তিন গোয়েন্দা</span>।</p>
+                <p>আমি বাঙালি, থাকি চাচা-চাচীর কাছে। দুই বন্ধুর একজনের নাম মুসা আমান। ব্যায়ামবীর, আমেরিকান নিগ্রো; অন্যজন আইরিশ আমেরিকান, রবিন মিলফোর্ড, বইয়ের পোকা।</p>
+                <p>একই ক্লাসে পড়ি আমরা।</p>
+                <p>পাশা স্যালভিজ ইয়ার্ডে লোহা-লক্কড়ের জঞ্জালের নিচে পুরান এক মোবাইল হোম-এ আমাদের হেডকোয়ার্টার।</p>
+                <p>তিনটি রহস্যের সমাধান করতে চলেছি—</p>
+                <p>এসো না, চলে এসো আমাদের দলে।</p>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- বৈশিষ্ট্য ও সাম্প্রতিক ফিউচারসমূহের বাটন সেকশন -->
+        <section class="features-section">
+            <h3 class="features-title">আমাদের বৈশিষ্ট্য ও ফিচারসমূহ</h3>
+            
+            <div class="button-grid">
+                <a href="info.html" class="feature-btn">তিন গোয়েন্দার পরিচয়</a>
+                <a href="list.xml" class="feature-btn">তিন গোয়েন্দা বইয়ের তালিকা</a>
+                <a href="BookTracker.html" class="feature-btn">তিন গোয়েন্দা বুক ট্র্যাকার</a>
+                <a href="card.html" class="feature-btn">তিন গোয়েন্দা কার্ড জেনারেটর</a>
+            </div>
+
+            <!-- নোটিশ বক্স -->
+            <div class="notice-box">
+                <p><strong>বিজ্ঞপ্তি:</strong> ওয়েবসাইটটি নির্মাণের কাজ চলমান।</p>
+                <p>সামনে আরও অনেক ফিচার যুক্ত হবে। আমাদের সাথেই থাকুন!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ফুটার সেকশন -->
+    <footer class="footer">
+        <h4>তিন গোয়েন্দা সম্পর্কে আরও জানুন</h4>
+        <p>আমাদের সাথে যুক্ত হতে এবং নিয়মিত আপডেট পেতে নিচের গ্রুপগুলোতে জয়েন করুন:</p>
+        <div class="footer-links">
+            <a href="https://www.facebook.com/groups/tigofansposting/" target="_blank">তিন গোয়েন্দা ফ্যানস পোস্টিং</a>
+            <a href="https://www.facebook.com/groups/tigomemeposting/" target="_blank">তিন গোয়েন্দা মিম পোস্টিং</a>
+        </div>
+        <div class="copyright">
+            &copy; ২০২৬ তিন গোয়েন্দা ফ্যানস পোস্টিং
+        </div>
+    </footer>
+
+</body>
+  </html>
