@@ -467,7 +467,7 @@
 
     <!-- Progress Section -->
     <div class="tg-progress-box">
-      <div class="tg-progress-text">পড়া শেষ: <span id="selectedCount">0</span> / 160 (<span id="percentageText">0%</span>)</div>
+      <div class="tg-progress-text">পড়া শেষ হয়েছে: <span id="selectedCount">0</span> / 160 (<span id="percentageText">0%</span>)</div>
       <div class="tg-progress-bg">
         <div class="tg-progress-fill" id="progressBar"></div>
       </div>
@@ -496,7 +496,7 @@
           </div>
 
           <div>
-            <div class="card-user-name" id="cardTitleText">ফারহান মাহিন</div>
+            <div class="card-user-name" id="cardTitleText">কিশোর পাশা</div>
 
             <div class="card-stats-text">
               মোট বই পড়েছেন: <span id="cardCountText">0</span> টি (160 টির মধ্যে)
@@ -515,7 +515,7 @@
           <!-- Bottom Footer Row -->
           <div class="card-footer">
             <div>তারিখ: <span id="cardDateText">03/11/2026</span></div>
-            <div>সৌজন্যে: তিন গোয়েন্দা ফ্যানস্ পোস্টিং</div>
+            <div>সৌজন্যে: তিন গোয়েন্দা ফ্যানস পোস্টিং</div>
           </div>
         </div>
       </div>
@@ -615,7 +615,7 @@ function getReaderLevel(percentage) {
   if (percentage <= 65) return "পাকা ডিটেকটিভ";
   if (percentage <= 80) return "অভিজ্ঞ ইনভেস্টিগেটর";
   if (percentage <= 95) return "মাস্টার গোয়েন্দা";
-  if (percentage <= 99) return "ত্রিগোপিডিয়া";
+  if (percentage <= 100) return "তিগোপিডিয়া";
   return "তিন গোয়েন্দা সম্রাট";
 }
 
