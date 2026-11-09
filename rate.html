@@ -357,7 +357,7 @@
         <div class="instructions">
             <h3>নির্দেশাবলী:</h3>
             <ol>
-                <li>নিচে <b>"শুরু করুন"</b> বাটনে ক্লিক করে রেটিং প্রক্রিয়া শুরু করুন।</li>
+                <li>নিচে <b>“শুরু করুন”</b> বাটনে ক্লিক করে রেটিং প্রক্রিয়া শুরু করুন।</li>
                 <li>তিন গোয়েন্দা সিরিজের ১৬০টি বই থেকে একটি বই র‍্যান্ডমলি বেছে নেওয়া হবে।</li>
                 <li>বইটি পড়া হয়ে থাকলে রেটিং দিন, পড়া না থাকলে অন্য বই সিলেক্ট করুন।</li>
                 <li>৭টি প্রশ্নের জন্য ১ থেকে ৫ পর্যন্ত রেটিং সিলেক্ট করুন।</li>
@@ -374,8 +374,8 @@
             <p style="font-size: 15px; color: #64748b;">আপনার জন্য নির্বাচিত বই:</p>
             <div id="displayed-book-title" class="book-title">...</div>
         </div>
-        <button class="btn" onclick="goToRating()">আমি বইটি পড়েছি এবং রেটিং দিতে চাই</button>
-        <button class="btn btn-secondary" onclick="pickRandomBook()">আমি বইটি পড়িনি, অন্য একটি বই বেছে দিন</button>
+        <button class="btn" onclick="goToRating()">বইটি পড়েছি এবং রেটিং দিতে চাই</button>
+        <button class="btn btn-secondary" onclick="pickRandomBook()">বইটি পড়িনি, অন্য একটি বই বেছে দিন</button>
     </div>
 
     <!-- Step 3: Rating Form -->
@@ -417,7 +417,7 @@
         </div>
 
         <div class="question-group">
-            <div class="question-title">৪. তিন গোয়েন্দার চারিত্রিক/ চিরচেনা বৈশিষ্ট্য কতোটা বিদ্যমান ছিল?</div>
+            <div class="question-title">৪. তিন গোয়েন্দার চারিত্রিক/চিরচেনা বৈশিষ্ট্য কতোটা বিদ্যমান ছিল?</div>
             <div class="rating-buttons" id="q4-ratings">
                 <button class="rate-btn" onclick="setRating(4, 1)">১</button>
                 <button class="rate-btn" onclick="setRating(4, 2)">২</button>
@@ -461,7 +461,7 @@
         </div>
 
         <div class="input-group">
-            <label for="user-name">রিভিউ দাতার নাম (বাধ্যতামূলক):</label>
+            <label for="user-name">রিভিউদাতার নাম (বাধ্যতামূলক):</label>
             <input type="text" id="user-name" placeholder="আপনার নাম লিখুন">
         </div>
 
@@ -601,7 +601,7 @@
         document.getElementById('card-avg-score').innerText = `${toBanglaNum(avgScore)} / ৫`;
 
         // Caption Generation
-        const caption = `#রেট_দ্যা_বুক\n\nবইয়ের নাম: ${selectedBook}\nরিভিউ দাতার নাম: ${name}\nব্যক্তিগত গড় রেটিং: ${toBanglaNum(avgScore)}/৫\n\n১. সিরিজের সাথে মানানসই: ${toBanglaNum(ratings.q1)}/৫\n২. রহস্য ও গোয়েন্দাগিরি: ${toBanglaNum(ratings.q2)}/৫\n৩. গল্প ও পড়ার অভিজ্ঞতা: ${toBanglaNum(ratings.q3)}/৫\n৪. চারিত্রিক/চিরচেনা বৈশিষ্ট্য: ${toBanglaNum(ratings.q4)}/৫\n৫. শুরু থেকে শেষ অবধি আগ্রহ: ${toBanglaNum(ratings.q5)}/৫\n৬. টুইস্ট: ${toBanglaNum(ratings.q6)}/৫\n৭. উত্তেজনাপূর্ণ আবহ: ${toBanglaNum(ratings.q7)}/৫\n\n<আপনার নিজের অনুভূতি এখানে কিছু লাইনে লিখুন>\n\nআপনিও এমন মজার মজার রেটিং দিন এই ওয়েবসাইট ব্যবহার করে:\ntingoyenda.vercel.app/rate.html`;
+        const caption = `#রেট_দ্য_বুক\n\nবইয়ের নাম: ${selectedBook}\nরিভিউদাতার নাম: ${name}\nব্যক্তিগত গড় রেটিং: ${toBanglaNum(avgScore)}/৫\n\n১. সিরিজের সাথে মানানসই: ${toBanglaNum(ratings.q1)}/৫\n২. রহস্য ও গোয়েন্দাগিরি: ${toBanglaNum(ratings.q2)}/৫\n৩. গল্প ও পড়ার অভিজ্ঞতা: ${toBanglaNum(ratings.q3)}/৫\n৪. চারিত্রিক/চিরচেনা বৈশিষ্ট্য: ${toBanglaNum(ratings.q4)}/৫\n৫. শুরু থেকে শেষ অবধি আগ্রহ: ${toBanglaNum(ratings.q5)}/৫\n৬. টুইস্ট: ${toBanglaNum(ratings.q6)}/৫\n৭. উত্তেজনাপূর্ণ আবহ: ${toBanglaNum(ratings.q7)}/৫\n\n<আপনার নিজের অনুভূতি এখানে কিছু লাইনে লিখুন>\n\nআপনিও এমন মজার মজার রেটিং দিন এই ওয়েবসাইট ব্যবহার করে:\ntingoyenda.vercel.app/rate.html`;
         
         document.getElementById('caption-text').value = caption;
 
