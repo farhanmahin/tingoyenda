@@ -271,22 +271,23 @@
             box-shadow: 0 0 0 2px #000000;
         }
 
-        /* Square Photo Card Styling (Enhanced & Beautiful) */
+        /* 1024x1024 Square Photo Card Styling */
         .card-wrapper {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
+            overflow: hidden;
         }
 
         .photo-card {
-            width: 380px;
-            height: 380px;
+            width: 450px;
+            height: 450px;
             background-color: var(--theme-bg-light);
-            border: 6px solid var(--theme-color);
-            outline: 2px dashed #8fae92;
-            outline-offset: -10px;
-            border-radius: 12px;
-            padding: 24px;
+            border: 8px solid var(--theme-color);
+            outline: 3px dashed #8fae92;
+            outline-offset: -14px;
+            border-radius: 16px;
+            padding: 30px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
@@ -295,14 +296,33 @@
             text-align: center;
             position: relative;
             box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* Watermark Background */
+        .photo-card::before {
+            content: "তিন গোয়েন্দা";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            font-size: 65px;
+            font-weight: 700;
+            color: var(--theme-color);
+            opacity: 0.06;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .card-header-badge {
-            font-size: 12px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--theme-color);
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            position: relative;
+            z-index: 1;
         }
 
         .card-body-content {
@@ -311,62 +331,64 @@
             align-items: center;
             justify-content: center;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         .card-book-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             line-height: 1.3;
         }
 
         .card-score-wrapper {
-            margin: 4px 0;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 6px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.05);
+            margin: 6px 0;
+            background: transparent; /* সাদা ব্যাকগ্রাউন্ড সরানো হয়েছে */
+            padding: 4px 10px;
         }
 
         .card-score-num {
-            font-size: 38px;
+            font-size: 44px;
             font-weight: 700;
             color: var(--theme-color);
             line-height: 1;
         }
 
         .card-score-label {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             color: #64748b;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         .card-reviewer-info {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             color: #334155;
-            margin-top: 8px;
+            margin-top: 10px;
         }
 
         .card-reviewer-info strong {
             color: var(--theme-color);
             font-weight: 700;
-            border-bottom: 1.5px dashed var(--theme-color);
-            padding-bottom: 1px;
+            border-bottom: none; /* ড্যাশ বা আন্ডারলাইন সরানো হয়েছে */
+            padding-bottom: 0;
         }
 
         .card-footer-box {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             color: #4a5568;
             border-top: 1px solid rgba(0,0,0,0.1);
             width: 100%;
-            padding-top: 8px;
+            padding-top: 10px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Caption Text Box (Enlarged) */
+        /* Caption Text Box */
         .caption-section {
             background: #f8fafc;
             border: 1px solid var(--border-color);
@@ -606,7 +628,7 @@
             </div>
         </div>
 
-        <button class="btn btn-success" onclick="downloadCard()">📷 এইচডি ফটো কার্ড ডাউনলোড করুন</button>
+        <button class="btn btn-success" onclick="downloadCard()">📷 এইচডি ফটো কার্ড ডাউনলোড করুন (১০২৪×১০২৪)</button>
 
         <div class="caption-section">
             <p style="font-weight: 600; margin-bottom: 8px; font-size: 15px;">আপনার পোস্টের জন্য ক্যাপশনটি এখান থেকে সংগ্রহ করুন:</p>
@@ -655,7 +677,7 @@
         "দীঘির দানো", "উল্কি রহস্য", "নকশা", "ডাকাতের পিছে", "মৃত্যুঘড়ি", "জলদস্যুর মোহর", "শয়তানের থাবা", "গুপ্তচর শিকারি", "পতঙ্গ ব্যবসা", "পুরনো কামান",
         "টাকার খেলা", "জাল নোট", "মাকড়সা মানব", "গেল কোথায়", "ওকিমুরো কর্পোরেশন", "বিষাক্ত অর্কিড", "অপারেশন কক্সবাজার", "মায়ানেকড়ে", "প্রেতাত্মার প্রতিশোধ", "ভয়ঙ্কর অসহায়",
         "সোনার খোজে", "তুষার বন্দি", "বিপজ্জনক খেলা", "রাতের আধারে", "প্রেতের ছায়া", "আরেক ফ্রাঙ্কেনস্টাইন", "মায়াজাল", "রাত্রী ভয়ঙ্কর", "গোপন ফর্মুলা", "সৈকতে সাবধান",
-        "ভ্যাম্পায়ারের দ্বীপ", "খেপা কিশোর", "দ্বীপের মালিক", "কিশোর জাদুকর", "তিন বিঘা", "দক্ষিণ যাত্রা", "গ্রেট রবিনিয়োসো", "গ্রেট কিশোরিয়োসো", "গ্রেট মুসাইয়োসো", "নিখোঁজ সংবাদ",
+        "ভ্যাম্পায়ارهای দ্বীপ", "খেপা কিশোর", "দ্বীপের মালিক", "কিশোর জাদুকর", "তিন বিঘা", "দক্ষিণ যাত্রা", "গ্রেট রবিনিয়োসো", "গ্রেট কিশোরিয়োসো", "গ্রেট মুসাইয়োসো", "নিখোঁজ সংবাদ",
         "চাঁদের ছায়া", "অপারেশন অ্যালিগেটর", "প্রত্নসন্ধান", "দুর্গম কারাগার", "মানব ছিনতাই", "নিষিদ্ধ এলাকা", "সময়-সুড়ঙ্গ", "পিশাচ কন্যা", "ডাকাত সর্দার", "ছদ্মবেশী গোয়েন্দা",
         "জবর দখল", "যুদ্ধযাত্রা", "সীমান্তে সংঘাত", "স্বর্গদ্বীপ", "সি সি সি", "নেকড়ের গুহা", "শ্বাপদের চোখ", "পোষা ডাইনোসর", "ডীপ ফ্রিজ", "তাসের খেলা",
         "মহাকাশের কিশোর", "প্রেতের অভিশাপ", "বিপদের গন্ধ", "টাইম ট্রাভেল", "স্পাইডারম্যান", "সরাইখানায় ষড়যন্ত্র", "বাশিরহস্য", "বাংলাদেশে তিন গোয়েন্দা", "জয়দেবপুরে তিন গোয়েন্দা", "হীরের কার্তুজ"
@@ -750,7 +772,8 @@
 
     function downloadCard() {
         const cardContainer = document.getElementById('photo-card');
-        html2canvas(cardContainer, { scale: 3 }).then(canvas => {
+        // scale: 2.28 ensures 450px width card renders precisely to ~1024x1024 px HD resolution
+        html2canvas(cardContainer, { scale: 2.28, useCORS: true }).then(canvas => {
             const link = document.createElement('a');
             link.download = `${selectedBook}-Rating-Card.png`;
             link.href = canvas.toDataURL('image/png');
@@ -765,4 +788,4 @@
 </script>
 
 </body>
-				</html>
+																		</html>
