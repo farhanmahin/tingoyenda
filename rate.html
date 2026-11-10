@@ -271,7 +271,7 @@
             box-shadow: 0 0 0 2px #000000;
         }
 
-        /* Square Photo Card Styling */
+        /* Square Photo Card Styling (Enhanced & Beautiful) */
         .card-wrapper {
             display: flex;
             justify-content: center;
@@ -282,10 +282,12 @@
             width: 380px;
             height: 380px;
             background-color: var(--theme-bg-light);
-            border: 2px solid var(--theme-color);
-            border-radius: 16px;
+            border: 6px solid var(--theme-color);
+            outline: 2px dashed #8fae92;
+            outline-offset: -10px;
+            border-radius: 12px;
             padding: 24px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -296,10 +298,10 @@
         }
 
         .card-header-badge {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--theme-color);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
@@ -314,31 +316,35 @@
         .card-book-title {
             font-size: 24px;
             font-weight: 700;
-            color: #0f172a;
+            color: var(--primary-color);
             margin-bottom: 10px;
             line-height: 1.3;
         }
 
         .card-score-wrapper {
             margin: 4px 0;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 6px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .card-score-num {
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 700;
             color: var(--theme-color);
             line-height: 1;
         }
 
         .card-score-label {
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12px;
+            font-weight: 600;
             color: #64748b;
-            margin-top: 4px;
+            margin-top: 3px;
         }
 
         .card-reviewer-info {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             color: #334155;
             margin-top: 8px;
@@ -347,37 +353,20 @@
         .card-reviewer-info strong {
             color: var(--theme-color);
             font-weight: 700;
+            border-bottom: 1.5px dashed var(--theme-color);
+            padding-bottom: 1px;
         }
 
         .card-footer-box {
             font-size: 12px;
-            font-weight: 500;
-            color: #64748b;
-            border-top: 1px solid rgba(0,0,0,0.08);
+            font-weight: 600;
+            color: #4a5568;
+            border-top: 1px solid rgba(0,0,0,0.1);
             width: 100%;
             padding-top: 8px;
         }
 
-        /* Live Preview Box in Rating Screen */
-        .live-preview-container {
-            background: #f8fafc;
-            border: 1.5px dashed var(--theme-color);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .preview-card-mini {
-            background: #f4f9f5;
-            border: 1.5px solid var(--theme-color);
-            border-radius: 10px;
-            padding: 15px;
-            max-width: 280px;
-            margin: 10px auto 0 auto;
-            text-align: center;
-        }
-
-        /* Caption Text Box */
+        /* Caption Text Box (Enlarged) */
         .caption-section {
             background: #f8fafc;
             border: 1px solid var(--border-color);
@@ -388,12 +377,12 @@
 
         .caption-box {
             width: 100%;
-            height: 160px;
+            height: 250px;
             padding: 12px;
             border: 1px solid #cbd5e1;
             border-radius: 10px;
             font-size: 14px;
-            resize: none;
+            resize: vertical;
             background: #ffffff;
             margin-bottom: 12px;
             white-space: pre-wrap;
@@ -472,8 +461,8 @@
                 <li>নিচে <b>“শুরু করুন”</b> বাটনে ক্লিক করে রেটিং প্রক্রিয়া শুরু করুন।</li>
                 <li>তিন গোয়েন্দা সিরিজের ১৬০টি বই থেকে একটি বই র‍্যান্ডমলি বেছে নেওয়া হবে।</li>
                 <li>বইটি পড়া হয়ে থাকলে রেটিং দিন, পড়া না থাকলে অন্য বই সিলেক্ট করুন।</li>
-                <li>৭টি প্রশ্নের জন্য ১ থেকে ৫ পর্যন্ত রেটিং সিলেক্ট করুন এবং লাইভ প্রিভিউ দেখতে থাকুন।</li>
-                <li>আপনার নাম লিখে সুন্দর স্কয়ার ফটো কার্ড ডাউনলোড করুন এবং পোস্টের ক্যাপশন কপি করুন।</li>
+                <li>৭টি প্রশ্নের জন্য ১ থেকে ৫ পর্যন্ত রেটিং সিলেক্ট করুন।</li>
+                <li>আপনার নাম লিখে সুন্দর স্কয়ার ফটো কার্ড তৈরি করুন, ডাউনলোড করুন এবং ক্যাপশন কপি করুন।</li>
             </ol>
         </div>
         <button class="btn" onclick="startProcess()">শুরু করুন</button>
@@ -495,17 +484,6 @@
         <h2>রেটিং দিন</h2>
         <p style="text-align: center; font-weight: bold; color: var(--theme-color); font-size: 20px; margin-bottom: 18px;" id="rating-book-name"></p>
         
-        <!-- লাইভ প্রিভিউ বক্স -->
-        <div class="live-preview-container">
-            <div style="font-size: 14px; font-weight: 600; color: #1b4d2e; margin-bottom: 4px;">👁️ কার্ডের লাইভ প্রিভিউ:</div>
-            <div class="preview-card-mini">
-                <div style="font-size: 11px; font-weight: 700; color: #1b4d2e;">রেট দ্য বুক</div>
-                <div style="font-size: 15px; font-weight: 700; color: #0f172a; margin: 4px 0;" id="preview-mini-title">বইয়ের নাম</div>
-                <div style="font-size: 24px; font-weight: 700; color: #1b4d2e;" id="preview-mini-score">০.০ / ৫</div>
-                <div style="font-size: 12px; color: #475569;" id="preview-mini-name">রিভিউ: --</div>
-            </div>
-        </div>
-
         <div class="question-group">
             <div class="question-title">১. বইটি কি তিন গোয়েন্দা সিরিজের সাথে মানানসই?</div>
             <div class="rating-buttons" id="q1-ratings">
@@ -585,7 +563,7 @@
 
         <div class="input-group">
             <label for="user-name">রিভিউদাতার নাম (বাধ্যতামূলক):</label>
-            <input type="text" id="user-name" placeholder="আপনার নাম লিখুন" oninput="updateLivePreview()">
+            <input type="text" id="user-name" placeholder="আপনার নাম লিখুন">
         </div>
 
         <button class="btn" onclick="generateCard()">ফটো কার্ড ও ক্যাপশন তৈরি করুন</button>
@@ -672,7 +650,7 @@
         "খোড়া গোয়েন্দা", "অথৈ সাগর ১", "অথৈ সাগর ২", "বুদ্ধির ঝিলিক", "গোলাপী মুক্তো", "প্রজাপতির খামার", "পাগল সংঘ", "ভাঙা ঘোড়া", "ঢাকায় তিন গোয়েন্দা", "জলকন্যা",
         "বেগুনী জলদস্যু", "পায়ের ছাপ", "তেপান্তর", "সিংহের গর্জন", "পুরনো ভূত", "জাদুচক্র", "গাড়ির জাদুকর", "প্রাচীন মূর্তি", "নিশাচর", "দক্ষিণের দ্বীপ",
         "ঈশ্বরের অশ্রু", "নকল কিশোর", "তিন পিশাচ", "খাবারে বিষ", "ওয়ার্নিং বেল", "অবাক কাণ্ড", "বিমান দুর্ঘটনা", "গোরস্তানের আতঙ্ক", "রেসের ঘোড়া", "খুন!",
-        "স্পেনের জাদুকর", "বানরের মুখোশ", "ধূসর মেরু", "কালো হাত", "মূর্তির হুঙ্কার", "চিতা নিরুদ্দেশ", "অভিনয়", "আলোর সঙ্কেত", "জিনার সেই দ্বীপ", "ঐতিহাসিক দুর্গ",
+        "স্পেনের জাদুকর", "বানরের মুখোশ", "ধূসর মেরু", "cালো হাত", "মূর্তির হুঙ্কার", "চিতা নিরুদ্দেশ", "অভিনয়", "আলোর সঙ্কেত", "জিনার সেই দ্বীপ", "ঐতিহাসিক দুর্গ",
         "ঝামেলা", "কুকুরখেকো ডাইনী", "নরকে হাজির", "বিড়াল উধাও", "ঠগবাজি", "যুদ্ধঘোষণা", "মারাত্মক ভুল", "মঞ্চভীতি", "খেলার নেশা", "বিষের ভয়",
         "দীঘির দানো", "উল্কি রহস্য", "নকশা", "ডাকাতের পিছে", "মৃত্যুঘড়ি", "জলদস্যুর মোহর", "শয়তানের থাবা", "গুপ্তচর শিকারি", "পতঙ্গ ব্যবসা", "পুরনো কামান",
         "টাকার খেলা", "জাল নোট", "মাকড়সা মানব", "গেল কোথায়", "ওকিমুরো কর্পোরেশন", "বিষাক্ত অর্কিড", "অপারেশন কক্সবাজার", "মায়ানেকড়ে", "প্রেতাত্মার প্রতিশোধ", "ভয়ঙ্কর অসহায়",
@@ -713,7 +691,6 @@
         ratings = { q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0, q7: 0 };
         document.querySelectorAll('.rate-btn').forEach(btn => btn.classList.remove('selected'));
         document.getElementById('user-name').value = '';
-        updateLivePreview();
         showScreen('screen-rating');
     }
 
@@ -727,20 +704,6 @@
                 btn.classList.remove('selected');
             }
         });
-        updateLivePreview();
-    }
-
-    function updateLivePreview() {
-        const name = document.getElementById('user-name').value.trim() || "--";
-        const filledValues = Object.values(ratings).filter(v => v > 0);
-        let avg = "০.০";
-        if (filledValues.length > 0) {
-            const sum = filledValues.reduce((a, b) => a + b, 0);
-            avg = (sum / 7).toFixed(1);
-        }
-        document.getElementById('preview-mini-title').innerText = selectedBook;
-        document.getElementById('preview-mini-score').innerText = `${toBanglaNum(avg)} / ৫`;
-        document.getElementById('preview-mini-name').innerText = `রিভিউ: ${name}`;
     }
 
     function generateCard() {
@@ -802,4 +765,4 @@
 </script>
 
 </body>
-    </html>
+				</html>
