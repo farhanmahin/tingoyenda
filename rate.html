@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রেট দ্য বুক - তিন গোয়েন্দা বুক রেটিং</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #fdfdf9;
+            --card-bg: #ffffff;
+            --primary-color: #1b3622;
+            --theme-color: #1b4d2e;
+            --theme-bg-light: #f4f9f5;
+            --text-color: #2c3e50;
+            --border-color: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Hind Siliguri', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+
+        .navbar { width: 100%; background-color: #1b4d2e; padding: 14px 20px; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+        .brand-title { font-size: 22px; font-weight: 700; color: #ffffff; text-decoration: none; white-space: nowrap; letter-spacing: 0.5px; transition: color 0.2s; }
+        .brand-title:hover { color: #e2ede5; }
+
+        .main-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px 10px; width: 100%; }
+        .app-container { width: 100%; max-width: 650px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; padding: 25px; }
+
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        h1, h2, h3 { color: var(--primary-color); text-align: center; margin-bottom: 15px; font-weight: 700; }
+        p { line-height: 1.6; margin-bottom: 15px; color: #4a5568; }
+
+        .instructions { background: #f4f8f5; border-left: 4px solid var(--theme-color); padding: 18px; border-radius: 6px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .instructions ol { padding-left: 20px; }
+        .instructions li { margin-bottom: 10px; color: #2d3748; font-size: 15px; }
+
+        .btn { display: block; width: 100%; padding: 12px 20px; background: var(--theme-color); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-bottom: 12px; transition: all 0.2s ease; text-align: center; }
+        .btn:hover { background: #12331e; }
+        .btn-secondary { background: #475569; }
+        .btn-secondary:hover { background: #334155; }
+        .btn-success { background: #d97706; }
+        .btn-success:hover { background: #b45309; }
+
+        .book-display { text-align: center; padding: 35px 20px; background: #f8fafc; border-radius: 14px; margin-bottom: 20px; border: 2px dashed #cbd5e1; }
+        .book-title { font-size: 26px; color: var(--primary-color); margin-top: 10px; font-weight: 700; line-height: 1.3; }
+
+        .question-group { margin-bottom: 18px; background: #f8fafc; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .question-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: #334155; }
+        .rating-buttons { display: flex; gap: 8px; }
+        .rate-btn { flex: 1; padding: 8px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; color: #475569; transition: all 0.2s; }
+        .rate-btn.selected { background: var(--theme-color); color: white; border-color: var(--theme-color); }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #334155; }
+        .input-group input { width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 16px; outline: none; }
+        .input-group input:focus { border-color: var(--theme-color); }
+
+        .color-picker-wrapper { text-align: center; margin-bottom: 15px; }
+        .color-picker-label { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: #64748b; }
+        .color-picker { display: flex; gap: 12px; justify-content: center; }
+        .color-option { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid #ffffff; box-shadow: 0 0 0 1px #cbd5e1; transition: transform 0.2s; }
+        .color-option:hover { transform: scale(1.1); }
+        .color-option.selected { box-shadow: 0 0 0 2px #000000; }
+
+        /* Square Photo Card (1:1) */
+        .card-wrapper { margin: 0 auto 20px; width: 450px; height: 450px; overflow: hidden; }
+        .card-scaler { width: 450px; height: 450px; transform-origin: top left; }
+        .photo-card {
+            --theme-color: #1b4d2e;
+            --theme-bg-light: #f4f9f5;
+            width: 450px; height: 450px;
+            position: relative; overflow: hidden; box-sizing: border-box;
+            border: 10px solid var(--theme-color);
+            border-radius: 18px;
+            background-color: var(--theme-bg-light);
+            background-image: radial-gradient(rgba(0,0,0,0.07) 1.5px, transparent 1.5px);
+            background-size: 18px 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+        .pc-frame { position: absolute; inset: 8px; border: 2px dashed var(--theme-color); border-radius: 10px; opacity: 0.45; }
+        .pc-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 330px; font-weight: 700; line-height: 1; color: var(--theme-color); opacity: 0.06; }
+        .pc-qmark { position: absolute; font-size: 44px; font-weight: 700; line-height: 1; color: var(--theme-color); opacity: 0.35; }
+        .pc-q1 { top: 14px; left: 22px; transform: rotate(-15deg); }
+        .pc-q2 { top: 14px; right: 22px; transform: rotate(15deg); }
+        .pc-q3 { bottom: 52px; left: 22px; transform: rotate(10deg); }
+        .pc-q4 { bottom: 52px; right: 22px; transform: rotate(-10deg); }
+        .pc-content { position: absolute; top: 22px; left: 30px; right: 30px; bottom: 44px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+        .card-header-badge { background: var(--theme-color); color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 2px; padding: 5px 20px; border-radius: 30px; }
+        .card-book-title { font-size: 30px; font-weight: 700; color: var(--theme-color); line-height: 1.25; max-width: 100%; word-break: break-word; }
+        .score-circle { width: 112px; height: 112px; border-radius: 50%; background: var(--theme-color); border: 4px solid #fff; box-shadow: 0 0 0 3px var(--theme-color); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .card-score-num { font-size: 44px; font-weight: 700; line-height: 1; }
+        .score-out { font-size: 14px; font-weight: 600; opacity: 0.9; margin-top: 2px; }
+        .card-stars { font-size: 26px; line-height: 1; letter-spacing: 4px; }
+        .star-on { color: #f59e0b; }
+        .star-off { color: #cbd5e1; }
+        .card-score-label { font-size: 13px; font-weight: 600; color: #64748b; }
+        .card-reviewer-info { font-size: 15px; font-weight: 500; color: #334155; background: #fff; border: 1.5px solid var(--theme-color); border-radius: 30px; padding: 4px 18px; }
+        .card-reviewer-info strong { color: var(--theme-color); font-weight: 700; }
+        .card-footer-box { position: absolute; left: 0; right: 0; bottom: 0; height: 34px; background: var(--theme-color); color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+        .caption-section { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 14px; padding: 18px; margin-top: 20px; }
+        .caption-box { width: 100%; height: 250px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; resize: vertical; background: #ffffff; margin-bottom: 12px; white-space: pre-wrap; line-height: 1.6; color: #334155; }
+
+        .footer { width: 100%; background-color: #1b4d2e; color: #ecf0f1; padding: 25px 15px; text-align: center; margin-top: auto; }
+        .footer h4 { color: #ffffff; font-size: 17px; margin-bottom: 8px; }
+        .footer p { font-size: 14px; color: #e2e8f0; margin-bottom: 15px; }
+        .footer-links { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; align-items: center; margin-bottom: 18px; }
+        .footer-links a { color: #ffffff; background-color: #2e7d32; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; display: inline-block; }
+        .footer-links a:hover { background-color: #ffffff; color: #1b4d2e; }
+        .copyright { font-size: 13px; color: #cbd5e0; border-top: 1px solid #2e7d32; padding-top: 12px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="brand-title">তিন গোয়েন্দা</a>
+</nav>
+
+<div class="main-wrapper">
+<div class="app-container">
+
+    <!-- Step 1: Instructions -->
+    <div id="screen-instructions" class="screen active">
+        <h1>রেট দ্য বুক</h1>
+        <div class="instructions">
+            <h3>📌 নির্দেশাবলী:</h3>
+            <ol>
+                <li>নিচে <b>“শুরু করুন”</b> বাটনে ক্লিক করে রেটিং প্রক্রিয়া শুরু করুন।</li>
+                <li>তিন গোয়েন্দা সিরিজের ১৬০টি বই থেকে একটি বই র‍্যান্ডমলি বেছে নেওয়া হবে।</li>
+                <li>বইটি পড়া হয়ে থাকলে রেটিং দিন, পড়া না থাকলে অন্য বই সিলেক্ট করুন।</li>
+                <li>৭টি প্রশ্নের জন্য ১ থেকে ৫ পর্যন্ত রেটিং সিলেক্ট করুন।</li>
+                <li>আপনার নাম লিখে সুন্দর স্কয়ার ফটো কার্ড তৈরি করুন, ডাউনলোড করুন এবং ক্যাপশন কপি করুন।</li>
+            </ol>
+        </div>
+        <button class="btn" onclick="startProcess()">শুরু করুন</button>
+    </div>
+
+    <!-- Step 2: Random Book Selection -->
+    <div id="screen-selection" class="screen">
+        <h2>বই নির্বাচন</h2>
+        <div class="book-display">
+            <p style="font-size: 15px; color: #64748b;">আপনার জন্য নির্বাচিত বই:</p>
+            <div id="displayed-book-title" class="book-title">...</div>
+        </div>
+        <button class="btn" onclick="goToRating()">বইটি পড়েছি এবং রেটিং দিতে চাই</button>
+        <button class="btn btn-secondary" onclick="pickRandomBook()">বইটি পড়িনি, অন্য একটি বই বেছে দিন</button>
+    </div>
+
+    <!-- Step 3: Rating Form -->
+    <div id="screen-rating" class="screen">
+        <h2>রেটিং দিন</h2>
+        <p style="text-align: center; font-weight: bold; color: var(--theme-color); font-size: 20px; margin-bottom: 18px;" id="rating-book-name"></p>
+
+        <div class="question-group">
+            <div class="question-title">১. বইটি কি তিন গোয়েন্দা সিরিজের সাথে মানানসই?</div>
+            <div class="rating-buttons" id="q1-ratings">
+                <button class="rate-btn" onclick="setRating(1, 1)">১</button>
+                <button class="rate-btn" onclick="setRating(1, 2)">২</button>
+                <button class="rate-btn" onclick="setRating(1, 3)">৩</button>
+                <button class="rate-btn" onclick="setRating(1, 4)">৪</button>
+                <button class="rate-btn" onclick="setRating(1, 5)">৫</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">২. রহস্য এবং গোয়েন্দাগিরির দিকটি কেমন লেগেছে?</div>
+            <div class="rating-buttons" id="q2-ratings">
+                <button class="rate-btn" onclick="setRating(2, 1)">১</button>
+                <button class="rate-btn" onclick="setRating(2, 2)">২</button>
+                <button class="rate-btn" onclick="setRating(2, 3)">৩</button>
+                <button class="rate-btn" onclick="setRating(2, 4)">৪</button>
+                <button class="rate-btn" onclick="setRating(2, 5)">৫</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">৩. গল্পের গঠন ও পড়ার সামগ্রিক অভিজ্ঞতা কেমন?</div>
+            <div class="rating-buttons" id="q3-ratings">
+                <button class="rate-btn" onclick="setRating(3, 1)">১</button>
+                <button class="rate-btn" onclick="setRating(3, 2)">২</button>
+                <button class="rate-btn" onclick="setRating(3, 3)">৩</button>
+                <button class="rate-btn" onclick="setRating(3, 4)">৪</button>
+                <button class="rate-btn" onclick="setRating(3, 5)">৫</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">৪. তিন গোয়েন্দার চারিত্রিক/চিরচেনা বৈশিষ্ট্য কতোটা বিদ্যমান ছিল?</div>
+            <div class="rating-buttons" id="q4-ratings">
+                <button class="rate-btn" onclick="setRating(4, 1)">১</button>
+                <button class="rate-btn" onclick="setRating(4, 2)">২</button>
+                <button class="rate-btn" onclick="setRating(4, 3)">৩</button>
+                <button class="rate-btn" onclick="setRating(4, 4)">৪</button>
+                <button class="rate-btn" onclick="setRating(4, 5)">৫</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">৫. শুরু থেকে শেষ অবধি আগ্রহ ধরে রেখেছে?</div>
+            <div class="rating-buttons" id="q5-ratings">
+                <button class="rate-btn" onclick="setRating(5, 1)">১</button>
+                <button class="rate-btn" onclick="setRating(5, 2)">২</button>
+                <button class="rate-btn" onclick="setRating(5, 3)">৩</button>
+                <button class="rate-btn" onclick="setRating(5, 4)">৪</button>
+                <button class="rate-btn" onclick="setRating(5, 5)">৫</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">৬. টুইস্ট কেমন ছিল?</div>
+            <div class="rating-buttons" id="q6-ratings">
+                <button class="rate-btn" onclick="setRating(6, 1)">১</button>
+                <button class="rate-btn" onclick="setRating(6, 2)">২</button>
+                <button class="rate-btn" onclick="setRating(6, 3)">৩</button>
+                <button class="rate-btn" onclick="setRating(6, 4)">৪</button>
+                <button class="rate-btn" onclick="setRating(6, 5)">৫</button>
+            </div>
+        </div>
+
+        <div class="question-group">
+            <div class="question-title">৭. উত্তেজনাপূর্ণ আবহ কতোটুকু ছিল বইতে?</div>
+            <div class="rating-buttons" id="q7-ratings">
+                <button class="rate-btn" onclick="setRating(7, 1)">১</button>
+                <button class="rate-btn" onclick="setRating(7, 2)">২</button>
+                <button class="rate-btn" onclick="setRating(7, 3)">৩</button>
+                <button class="rate-btn" onclick="setRating(7, 4)">৪</button>
+                <button class="rate-btn" onclick="setRating(7, 5)">৫</button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="user-name">রিভিউদাতার নাম (বাধ্যতামূলক):</label>
+            <input type="text" id="user-name" placeholder="আপনার নাম লিখুন">
+        </div>
+
+        <button class="btn" onclick="generateCard()">ফটো কার্ড ও ক্যাপশন তৈরি করুন</button>
+    </div>
+
+    <!-- Step 4: Photo Card & Caption Screen -->
+    <div id="screen-result" class="screen">
+        <h2>রেটিং কার্ড</h2>
+
+        <div class="color-picker-wrapper">
+            <div class="color-picker-label">কার্ডের ডার্ক কালার থিম বেছে নিন:</div>
+            <div class="color-picker">
+                <div class="color-option selected" style="background: #1b4d2e;" onclick="changeTheme('#1b4d2e', '#f4f9f5', this)"></div>
+                <div class="color-option" style="background: #1e3a8a;" onclick="changeTheme('#1e3a8a', '#eff6ff', this)"></div>
+                <div class="color-option" style="background: #881337;" onclick="changeTheme('#881337', '#faf0f2', this)"></div>
+                <div class="color-option" style="background: #0f172a;" onclick="changeTheme('#0f172a', '#f1f5f9', this)"></div>
+            </div>
+        </div>
+
+        <div class="card-wrapper" id="card-wrapper">
+          <div class="card-scaler" id="card-scaler">
+            <div id="photo-card" class="photo-card">
+                <div class="pc-frame"></div>
+                <div class="pc-watermark">?</div>
+                <div class="pc-qmark pc-q1">?</div>
+                <div class="pc-qmark pc-q2">?</div>
+                <div class="pc-qmark pc-q3">?</div>
+                <div class="pc-qmark pc-q4">?</div>
+
+                <div class="pc-content">
+                    <div class="card-header-badge">🔍 রেট দ্য বুক</div>
+                    <div class="card-book-title" id="card-book-name">বইয়ের নাম</div>
+                    <div class="score-circle">
+                        <div class="card-score-num" id="card-avg-score">০.০</div>
+                        <div class="score-out">/ ৫</div>
+                    </div>
+                    <div class="card-stars" id="card-stars"></div>
+                    <div class="card-score-label">ব্যক্তিগত গড় রেটিং</div>
+                    <div class="card-reviewer-info">
+                        রিভিউ করেছেন: <strong id="card-reviewer-name">--</strong>
+                    </div>
+                </div>
+
+                <div class="card-footer-box">সৌজন্যে: তিন গোয়েন্দা ফ্যানস পোস্টিং</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-success" onclick="downloadCard()">📷 এইচডি ফটো কার্ড ডাউনলোড করুন (১০২৪×১০২৪)</button>
+
+        <div class="caption-section">
+            <p style="font-weight: 600; margin-bottom: 8px; font-size: 15px;">আপনার পোস্টের জন্য ক্যাপশনটি এখান থেকে সংগ্রহ করুন:</p>
+            <textarea id="caption-text" class="caption-box" readonly></textarea>
+            <button class="btn btn-secondary" onclick="copyCaption()">ক্যাপশন কপি করুন</button>
+        </div>
+
+        <button class="btn" style="margin-top: 15px;" onclick="resetApp()">নতুন বই রেট করুন</button>
+    </div>
+
+</div>
+</div>
+
+<!-- লাইভ ভিজিটর কাউন্টার -->
+<div style="text-align: center; margin: 25px 0;">
+    <div style="display: inline-block; background-color: #f4f9f5; border: 1px solid #b7e4c7; padding: 10px 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        <span style="font-size: 14px; color: #1b4332; font-weight: 600; display: inline-block; margin-right: 8px;">🌐 মোট ভিজিটর সংখ্যা:</span>
+        <img src="https://visitor-badge.laobi.icu/badge?page_id=farhanmahin.tingoyenda" alt="Visitor Count" style="vertical-align: middle; height: 20px;" />
+    </div>
+</div>
+
+<!-- ফুটার সেকশন -->
+<footer class="footer">
+  <h4>তিন গোয়েন্দা সম্পর্কে আরও জানুন</h4>
+  <p>আমাদের সাথে যুক্ত হতে এবং নিয়মিত আপডেট পেতে নিচের গ্রুপগুলোতে জয়েন করুন:</p>
+  <div class="footer-links">
+    <a href="https://www.facebook.com/groups/tigofansposting/" target="_blank">তিন গোয়েন্দা ফ্যানস পোস্টিং</a>
+    <a href="https://www.facebook.com/groups/tigomemeposting/" target="_blank">তিন গোয়েন্দা মিম পোস্টিং</a>
+  </div>
+  <div class="copyright">
+    &copy; 2026 তিন গোয়েন্দা ফ্যানস পোস্টিং
+  </div>
+</footer>
+
+<script>
+    const books = [
+        "তিন গোয়েন্দা", "কঙ্কাল দ্বীপ", "রূপালী মাকড়সা", "ছায়াশ্বাপদ", "মমি", "রত্নদানো", "প্রেতসাধনা", "রক্তচক্ষু", "সাগরসৈকত", "জলদস্যুর দ্বীপ ১",
+        "জলদস্যুর দ্বীপ ২", "সবুজ ভূত", "হারানো তিমি", "মুক্তোশিকারী", "মৃত্যুখনি", "কাকাতুয়া রহস্য", "ছুটি", "ভূতের হাসি", "ছিনতাই", "ভীষণ অরণ্য ১",
+        "ভীষণ অরণ্য ২", "ড্রাগন", "হারানো উপত্যকা", "গুহামানব", "ভীতু সিংহ", "মহাকাশের আগন্তুক", "ইন্দ্রজাল", "মহাবিপদ", "খেপা শয়তান", "রত্নচোর",
+        "পুরনো শত্রু", "বোম্বেটে", "ভূতুড়ে সুড়ঙ্গ", "আবার সম্মেলন", "ভয়ালগিরি", "কালো জাহাজ", "পোচার", "ঘড়ির গোলমাল", "কানা বেড়াল", "বাক্সটা প্রয়োজন",
+        "খোড়া গোয়েন্দা", "অথৈ সাগর ১", "অথৈ সাগর ২", "বুদ্ধির ঝিলিক", "গোলাপী মুক্তো", "প্রজাপতির খামার", "পাগল সংঘ", "ভাঙা ঘোড়া", "ঢাকায় তিন গোয়েন্দা", "জলকন্যা",
+        "বেগুনী জলদস্যু", "পায়ের ছাপ", "তেপান্তর", "সিংহের গর্জন", "পুরনো ভূত", "জাদুচক্র", "গাড়ির জাদুকর", "প্রাচীন মূর্তি", "নিশাচর", "দক্ষিণের দ্বীপ",
+        "ঈশ্বরের অশ্রু", "নকল কিশোর", "তিন পিশাচ", "খাবারে বিষ", "ওয়ার্নিং বেল", "অবাক কাণ্ড", "বিমান দুর্ঘটনা", "গোরস্তানের আতঙ্ক", "রেসের ঘোড়া", "খুন!",
+        "স্পেনের জাদুকর", "বানরের মুখোশ", "ধূসর মেরু", "কালো হাত", "মূর্তির হুঙ্কার", "চিতা নিরুদ্দেশ", "অভিনয়", "আলোর সঙ্কেত", "জিনার সেই দ্বীপ", "ঐতিহাসিক দুর্গ",
+        "ঝামেলা", "কুকুরখেকো ডাইনী", "নরকে হাজির", "বিড়াল উধাও", "ঠগবাজি", "যুদ্ধঘোষণা", "মারাত্মক ভুল", "মঞ্চভীতি", "খেলার নেশা", "বিষের ভয়",
+        "দীঘির দানো", "উল্কি রহস্য", "নকশা", "ডাকাতের পিছে", "মৃত্যুঘড়ি", "জলদস্যুর মোহর", "শয়তানের থাবা", "গুপ্তচর শিকারি", "পতঙ্গ ব্যবসা", "পুরনো কামান",
+        "টাকার খেলা", "জাল নোট", "মাকড়সা মানব", "গেল কোথায়", "ওকিমুরো কর্পোরেশন", "বিষাক্ত অর্কিড", "অপারেশন কক্সবাজার", "মায়ানেকড়ে", "প্রেতাত্মার প্রতিশোধ", "ভয়ঙ্কর অসহায়",
+        "সোনার খোজে", "তুষার বন্দি", "বিপজ্জনক খেলা", "রাতের আধারে", "প্রেতের ছায়া", "আরেক ফ্রাঙ্কেনস্টাইন", "মায়াজাল", "রাত্রী ভয়ঙ্কর", "গোপন ফর্মুলা", "সৈকতে সাবধান",
+        "ভ্যাম্পায়ারের দ্বীপ", "খেপা কিশোর", "দ্বীপের মালিক", "কিশোর জাদুকর", "তিন বিঘা", "দক্ষিণ যাত্রা", "গ্রেট রবিনিয়োসো", "গ্রেট কিশোরিয়োসো", "গ্রেট মুসাইয়োসো", "নিখোঁজ সংবাদ",
+        "চাঁদের ছায়া", "অপারেশন অ্যালিগেটর", "প্রত্নসন্ধান", "দুর্গম কারাগার", "মানব ছিনতাই", "নিষিদ্ধ এলাকা", "সময়-সুড়ঙ্গ", "পিশাচ কন্যা", "ডাকাত সর্দার", "ছদ্মবেশী গোয়েন্দা",
+        "জবর দখল", "যুদ্ধযাত্রা", "সীমান্তে সংঘাত", "স্বর্গদ্বীপ", "সি সি সি", "নেকড়ের গুহা", "শ্বাপদের চোখ", "পোষা ডাইনোসর", "ডীপ ফ্রিজ", "তাসের খেলা",
+        "মহাকাশের কিশোর", "প্রেতের অভিশাপ", "বিপদের গন্ধ", "টাইম ট্রাভেল", "স্পাইডারম্যান", "সরাইখানায় ষড়যন্ত্র", "বাশিরহস্য", "বাংলাদেশে তিন গোয়েন্দা", "জয়দেবপুরে তিন গোয়েন্দা", "হীরের কার্তুজ"
+    ];
+
+    let selectedBook = "";
+    let ratings = { q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0, q7: 0 };
+
+    function toBanglaNum(num) {
+        const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        return num.toString().replace(/\d/g, d => banglaDigits[d]);
+    }
+
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startProcess() {
+        showScreen('screen-selection');
+        pickRandomBook();
+    }
+
+    function pickRandomBook() {
+        const randomIndex = Math.floor(Math.random() * books.length);
+        selectedBook = books[randomIndex];
+        document.getElementById('displayed-book-title').innerText = selectedBook;
+    }
+
+    function goToRating() {
+        document.getElementById('rating-book-name').innerText = selectedBook;
+        ratings = { q1: 0, q2: 0, q3: 0, q4: 0, q5: 0, q6: 0, q7: 0 };
+        document.querySelectorAll('.rate-btn').forEach(btn => btn.classList.remove('selected'));
+        document.getElementById('user-name').value = '';
+        showScreen('screen-rating');
+    }
+
+    function setRating(qNum, value) {
+        ratings['q' + qNum] = value;
+        const group = document.getElementById(`q${qNum}-ratings`);
+        group.querySelectorAll('.rate-btn').forEach((btn, idx) => {
+            if (idx + 1 === value) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+    }
+
+    function generateCard() {
+        const name = document.getElementById('user-name').value.trim();
+        if (!name) {
+            alert("অনুগ্রহ করে রিভিউ দাতার নাম লিখুন।");
+            document.getElementById('user-name').focus();
+            return;
+        }
+
+        if (!ratings.q1 || !ratings.q2 || !ratings.q3 || !ratings.q4 || !ratings.q5 || !ratings.q6 || !ratings.q7) {
+            alert("অনুগ্রহ করে ৭টি প্রশ্নেরই রেটিং দিন।");
+            return;
+        }
+
+        const avgScore = ((ratings.q1 + ratings.q2 + ratings.q3 + ratings.q4 + ratings.q5 + ratings.q6 + ratings.q7) / 7).toFixed(1);
+
+        document.getElementById('card-book-name').innerText = selectedBook;
+        document.getElementById('card-reviewer-name').innerText = name;
+        document.getElementById('card-avg-score').innerText = toBanglaNum(avgScore);
+
+        // স্টার
+        const filled = Math.round(avgScore);
+        document.getElementById('card-stars').innerHTML =
+            '<span class="star-on">' + '★'.repeat(filled) + '</span>' +
+            '<span class="star-off">' + '★'.repeat(5 - filled) + '</span>';
+
+        // বইয়ের নাম বড় হলে ফন্ট ছোট হবে
+        const len = selectedBook.length;
+        document.getElementById('card-book-name').style.fontSize =
+            len > 28 ? '22px' : len > 20 ? '26px' : '30px';
+
+        // Caption Generation
+        const caption = `#রেট_দ্য_বুক\n\nবইয়ের নাম: ${selectedBook}\nরিভিউদাতার নাম: ${name}\nব্যক্তিগত গড় রেটিং: ${toBanglaNum(avgScore)}/৫\n\n১. সিরিজের সাথে মানানসই: ${toBanglaNum(ratings.q1)}/৫\n২. রহস্য ও গোয়েন্দাগিরি: ${toBanglaNum(ratings.q2)}/৫\n৩. গল্প ও পড়ার অভিজ্ঞতা: ${toBanglaNum(ratings.q3)}/৫\n৪. চারিত্রিক/চিরচেনা বৈশিষ্ট্য: ${toBanglaNum(ratings.q4)}/৫\n৫. শুরু থেকে শেষ অবধি আগ্রহ: ${toBanglaNum(ratings.q5)}/৫\n৬. টুইস্ট: ${toBanglaNum(ratings.q6)}/৫\n৭. উত্তেজনাপূর্ণ আবহ: ${toBanglaNum(ratings.q7)}/৫\n\n<আপনার নিজের অনুভূতি এখানে কিছু লাইনে লিখুন>\n\nআপনিও এমন মজার মজার রেটিং দিন এই ওয়েবসাইট ব্যবহার করে:\ntingoyenda.vercel.app/rate.html`;
+
+        document.getElementById('caption-text').value = caption;
+
+        showScreen('screen-result');
+        fitCard();
+    }
+
+    function changeTheme(color, lightBg, el) {
+        document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+        el.classList.add('selected');
+        const card = document.getElementById('photo-card');
+        card.style.setProperty('--theme-color', color);
+        card.style.setProperty('--theme-bg-light', lightBg);
+    }
+
+    function copyCaption() {
+        const captionText = document.getElementById('caption-text');
+        captionText.select();
+        document.execCommand('copy');
+        alert("ক্যাপশন সফলভাবে কপি করা হয়েছে!");
+    }
+
+    // ছোট স্ক্রিনে কার্ড আনুপাতিকভাবে ছোট করে ফিট করে (সবসময় ১:১)
+    function fitCard() {
+        const wrapper = document.getElementById('card-wrapper');
+        const scaler = document.getElementById('card-scaler');
+        const avail = document.querySelector('.app-container').clientWidth - 50;
+        const s = Math.min(1, avail / 450);
+        scaler.style.transform = `scale(${s})`;
+        wrapper.style.width = (450 * s) + 'px';
+        wrapper.style.height = (450 * s) + 'px';
+    }
+    window.addEventListener('resize', fitCard);
+
+    async function downloadCard() {
+        const card = document.getElementById('photo-card');
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        html2canvas(card, {
+            scale: 1024 / 450,
+            width: 450,
+            height: 450,
+            useCORS: true,
+            backgroundColor: null,
+            onclone: (doc) => {
+                // মোবাইলে স্কেল থাকলেও ডাউনলোড যেন সবসময় ১০২৪×১০২৪ হয়
+                doc.getElementById('card-scaler').style.transform = 'none';
+                const w = doc.getElementById('card-wrapper');
+                w.style.width = '450px';
+                w.style.height = '450px';
+            }
+        }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = `${selectedBook}-Rating-Card.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    }
+
+    function resetApp() {
+        showScreen('screen-selection');
+        pickRandomBook();
+    }
+</script>
+
+</body>
+</html>
